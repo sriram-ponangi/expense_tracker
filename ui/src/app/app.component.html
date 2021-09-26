@@ -1,25 +1,12 @@
-<div class="container-fluid p-5 text-center title-bar mb-5">
+<div class="container-fluid p-5 text-center title-bar ">
   <h1  style="font-weight: bold">Expense Tracker</h1>
   <p>A simple tool to be more aware of your expenses.</p> 
 </div>
-
-<div class="container">
-
-  <div class="row">
-
-    <div class="col-md-6">
-      <app-add-expense-form></app-add-expense-form>
-    </div>
-
-    <div class="col-md-6">
-      <app-expenses-pie-chart></app-expenses-pie-chart>
-    </div>
-
-  </div>
-
-  <div class="row">
-  </div>
-
+<div class="row mb-5">
+  <app-main-nav-bar></app-main-nav-bar>
 </div>
 
-<router-outlet></router-outlet>
+<div class="container-fluid">
+  <router-outlet></router-outlet>  
+</div>
+
