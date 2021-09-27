@@ -9,6 +9,8 @@ import { ExpensesPieChartComponent } from './expenses-pie-chart/expenses-pie-cha
 import { MainNavBarComponent } from './main-nav-bar/main-nav-bar.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AllExpensesPageComponent } from './all-expenses-page/all-expenses-page.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { AllExpensesPageComponent } from './all-expenses-page/all-expenses-page.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
