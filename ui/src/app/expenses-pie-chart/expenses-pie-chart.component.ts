@@ -22,7 +22,7 @@ export class ExpensesPieChartComponent implements OnInit {
           'Futile',
         ],
         datasets: [{
-          data: [300, 300, 300, 300],
+          data: [400, 300, 200, 100],
           backgroundColor: [
             'rgb(178, 255, 89)', //Groceries            
             'rgb(0, 184, 212)', //Home           
