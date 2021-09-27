@@ -4,12 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddExpenseFormComponent } from './add-expense-form/add-expense-form.component';
-import { ExpensesPieChartComponent } from './expenses-pie-chart/expenses-pie-chart.component';
+import { AddExpenseFormComponent } from './main-nav-bar/home-page/add-expense-form/add-expense-form.component';
+import { ExpensesPieChartComponent } from './main-nav-bar/home-page/expenses-pie-chart/expenses-pie-chart.component';
 import { MainNavBarComponent } from './main-nav-bar/main-nav-bar.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { AllExpensesPageComponent } from './all-expenses-page/all-expenses-page.component';
+import { HomePageComponent } from './main-nav-bar/home-page/home-page.component';
+import { AllExpensesPageComponent } from './main-nav-bar/all-expenses-page/all-expenses-page.component';
 import { ChartsModule } from 'ng2-charts';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ChartsModule } from 'ng2-charts';
     ExpensesPieChartComponent,
     MainNavBarComponent,
     HomePageComponent,
-    AllExpensesPageComponent
+    AllExpensesPageComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
