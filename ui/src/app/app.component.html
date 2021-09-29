@@ -1,15 +1,19 @@
 <div class="container-fluid p-5 text-center title-bar ">
-  <h1  style="font-weight: bold">Expense Tracker</h1>
-  <p>A simple tool to be more aware of your expenses.</p> 
+  <h1 style="font-weight: bold">Expense Tracker</h1>
+  <p>A simple tool to be more aware of your expenses.</p>
 </div>
+
+
+<!-- Use ngIf to display the following div Before login -->
+<div class="row mb-5">
+  <app-auth></app-auth>
+</div>
+
+<!-- Use ngIf to display the following div After login -->
 <div class="row mb-5">
   <app-main-nav-bar></app-main-nav-bar>
 </div>
+
 <div class="container-fluid">
-  
- 
-
-  <router-outlet></router-outlet>  
-
+  <router-outlet></router-outlet>
 </div>
-

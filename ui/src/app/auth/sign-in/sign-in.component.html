@@ -1,1 +1,38 @@
-<p>sign-in works!</p>
+<div class="container">
+    <div class="card my-5">
+        <div class="card-body">
+            <form>
+                <h1>Login</h1>
+                <p>Please fill in this form to access your details.</p>
+                <hr>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Email</span>
+                    <input type="text" ngModel class="form-control" #emailInput="ngModel" [(ngModel)]="email"
+                        placeholder="Enter Your Email" name="email" id="email" required>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Password</span>
+                    <input type="password" class="form-control" ngModel #fnameInput="ngModel" [(ngModel)]="password"
+                        placeholder="Enter Your Password" name="password" id="password" required>
+                </div>
+
+                <div class="d-grid mb-3">
+                    <button type="button" class="btn btn-link" disabled> Forgot Password? </button>
+                </div>
+                
+
+                <div class="row">
+                    <div class="d-grid mb-3 col-6">
+                        <button type="button" class="btn btn-dark"> Submit </button>
+                    </div>
+
+                    <div class="d-grid mb-3 col-6">
+                        <button type="button" class="btn btn-primary"> Sign Up </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
