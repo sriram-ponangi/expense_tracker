@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CognitoUserPool, CognitoUserAttribute, ICognitoUserPoolData, ICognitoUserAttributeData } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
 
+
 interface formDataInterface {
   "name": string;
   "email": string;
@@ -16,16 +17,19 @@ interface formDataInterface {
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+
   isLoading: boolean = false;
   name: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
 
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
+
 
   onSignup(form: NgForm) {
     if (form.valid) {
@@ -64,6 +68,7 @@ export class SignUpComponent implements OnInit {
         console.log(result);        
         this.router.navigate(['/sign-in']);
       });
+
     }
   }
 
