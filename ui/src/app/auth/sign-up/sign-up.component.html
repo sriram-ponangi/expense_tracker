@@ -1,15 +1,17 @@
 <div class="container">
     <div class="card my-5">
         <div class="card-body">
-            <form>
+
+            <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+
                 <h1>Sign Up</h1>
                 <p>Please fill in this form to create an account.</p>
                 <hr>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text">Name</span>
-                    <input type="text" class="form-control" ngModel #fnameInput="ngModel" [(ngModel)]="fullname"
-                        placeholder="Enter Your Name" name="fullname" id="fullname" required>
+                    <input type="text" class="form-control" ngModel #fnameInput="ngModel" [(ngModel)]="name"
+                        placeholder="Enter Your Name" name="name" id="name" required>
                 </div>
 
                 <div class="input-group mb-3">
@@ -33,7 +35,7 @@
 
                 <div class="row">
                     <div class="d-grid mb-3 col-6">
-                        <button type="button" class="btn btn-dark"> Submit </button>
+                        <button type="submit" class="btn btn-dark"> Submit </button>
                     </div>
 
                     <div class="d-grid mb-3 col-6">
