@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CognitoUserPool, CognitoUserAttribute, ICognitoUserPoolData, ICognitoUserAttributeData } from 'amazon-cognito-identity-js';
+import { environment } from 'src/environments/environment';
 
 interface formDataInterface {
   "name": string;
@@ -14,20 +16,54 @@ interface formDataInterface {
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  isLoading:boolean = false;
-  fullname:string = '';
-  email:string = '';
-  password:string = '';
-  confirmPassword:string = '';
+  isLoading: boolean = false;
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSignup(form: NgForm){
+  onSignup(form: NgForm) {
     if (form.valid) {
-     this.isLoading = true;
+      this.isLoading = true;
+      let poolData: ICognitoUserPoolData = {
+        UserPoolId: environment.cognitoUserPoolId, // Your user pool id here
+        ClientId: environment.cognitoAppClientId // Your client id here
+      };
+      
+      let userPool = new CognitoUserPool(poolData);
+      
+      var attributeList: CognitoUserAttribute [] = [];
+      let formData: formDataInterface = {
+        "name": this.name,
+        "email": this.email
+      }
+
+      for (let key in formData) {
+        let attrData: CognitoUserAttribute = new CognitoUserAttribute({
+          Name: key,
+          Value: formData[key]
+        });
+        let attribute = new CognitoUserAttribute(attrData);
+        attributeList.push(attrData);
+      }      
+
+      userPool.signUp(this.email, this.password, attributeList, [], (
+        err,
+        result
+      ) => {
+        this.isLoading = false;
+        if (err) {
+          alert(err.message || JSON.stringify(err));
+          return;
+        }
+        console.log(result);        
+        this.router.navigate(['/sign-in']);
+      });
     }
   }
 
