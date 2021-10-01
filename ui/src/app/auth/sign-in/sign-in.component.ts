@@ -20,7 +20,7 @@ export class SignInComponent implements OnInit {
   }
 
 
-  navigateToSignUp(){
+  navigateToSignUp() {
     this.router.navigateByUrl('/sign-up');
   }
 
@@ -45,12 +45,26 @@ export class SignInComponent implements OnInit {
           // console.log('access token + ' + result.getAccessToken().getJwtToken());
           // console.log('id token + ' + result.getIdToken().getJwtToken());
           // console.log('refresh token + ' + result.getRefreshToken().getToken());
-          console.log(result.isValid());
-          
+          // console.log(result.isValid());
+
           this.router.navigate(["home"])
         },
         onFailure: (err) => {
-          alert(err.message || JSON.stringify(err));
+          let error_message = err.message || JSON.stringify(err);
+
+          if (err.code === 'UserNotConfirmedException') {
+            error_message = "Your account is not verified. " +
+              "We are sending the verification link again to your email, please click on it to verify your account";
+            cognitoUser.resendConfirmationCode(function (err, result) {
+              if (err) {
+                error_message = "Your account is not been verified."
+                  + "Resending the verification link failed due to: " +
+                  err.message || JSON.stringify(err);
+                return;
+              }
+            });
+          }
+          alert(error_message);
           this.isLoading = false;
         },
       });
