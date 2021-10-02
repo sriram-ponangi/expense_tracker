@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
