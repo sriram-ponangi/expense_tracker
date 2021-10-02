@@ -2,19 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
-  selector: 'app-main-nav-bar',
-  templateUrl: './main-nav-bar.component.html',
-  styleUrls: ['./main-nav-bar.component.css']
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css']
 })
-export class MainNavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  showAuthNavBar(): boolean{
+    let isAuth = this.authService.isLoggedIn();
+    return !isAuth;
+  }
+  
   onLogout(): void {
     let poolData = {
       UserPoolId: environment.cognitoUserPoolId,
