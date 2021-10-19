@@ -1,1 +1,52 @@
-<p>all-expenses-page works!</p>
+<div class="card shadow-lg ">
+
+    <div class="card-header">
+        <h1 style="font-weight: bold">All Expenses:</h1>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row mb-3">
+
+            <div class="col-xl-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">Start Date</span>
+                    <input type="date" class="form-control" id="startDate" aria-describedby="basic-addon3" required>
+                </div>
+            </div>
+
+            <div class="col-xl-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">End Date</span>
+                    <input type="date" class="form-control" id="endDate" aria-describedby="basic-addon3" required>
+                </div>
+            </div>
+
+            <div class=" d-grid">
+                <button type="button" class="btn btn-dark "> Show </button>
+            </div>
+        </div>
+        <hr/>
+        <div class="row mx-2">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col" *ngFor="let columnName of tablesColumnNames">
+                                {{columnName}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let expensesListByDate of tableData">
+                        <tr *ngFor="let expense of expensesListByDate.expenses">
+                            <td>{{expensesListByDate.date}}</td>
+                            <td>{{expense.reason}}</td>
+                            <td>{{expense.category}}</td>
+                            <td>{{expense.cost}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
