@@ -77,11 +77,12 @@ export class AllExpensesPageComponent implements OnInit {
     }
   ];
 
-
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
 }
+
+
+
