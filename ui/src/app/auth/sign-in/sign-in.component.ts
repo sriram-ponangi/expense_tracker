@@ -42,10 +42,10 @@ export class SignInComponent implements OnInit {
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
 
-          // console.log('access token + ' + result.getAccessToken().getJwtToken());
-          // console.log('id token + ' + result.getIdToken().getJwtToken());
-          // console.log('refresh token + ' + result.getRefreshToken().getToken());
-          // console.log(result.isValid());
+          console.log('access token + ' + result.getAccessToken().getJwtToken());
+          console.log('id token + ' + result.getIdToken().getJwtToken());
+          console.log('refresh token + ' + result.getRefreshToken().getToken());
+          console.log(result.isValid());
 
           this.router.navigate(["home"])
         },
