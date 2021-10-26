@@ -29,15 +29,15 @@ export class NavBarComponent implements OnInit {
     };
     let userPool = new CognitoUserPool(poolData);
     let cognitoUser = userPool.getCurrentUser();
-    console.log(cognitoUser?.getUsername());
+    // console.log(cognitoUser?.getUsername());
 
     cognitoUser?.getSession((err: any, session: any) => {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else if (!session.isValid()) {
-        console.log("Invalid session.");
+        console.warn("Invalid session.");
       } else {
-        console.log("IdToken: " + session.getIdToken().getJwtToken());
+        // console.log("IdToken: " + session.getIdToken().getJwtToken());
       }
     });
     
@@ -46,11 +46,11 @@ export class NavBarComponent implements OnInit {
 
     cognitoUser?.getSession((err: any, session: any) => {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else if (!session.isValid()) {
-        console.log("Invalid session.");
+        console.warn("Invalid session.");
       } else {
-        console.log("IdToken: " + session.getIdToken().getJwtToken());
+        // console.log("IdToken: " + session.getIdToken().getJwtToken());
       }
     });
     

@@ -43,8 +43,7 @@ export class AllExpensesPageComponent implements OnInit {
         response => {
           if (response.responseType === "SUCCESS") {
             this.tableData = response.data.Items;
-            console.log(JSON.stringify(this.tableData));
-
+            // console.log(JSON.stringify(this.tableData));
           }
         }, error => {
           console.error(error);

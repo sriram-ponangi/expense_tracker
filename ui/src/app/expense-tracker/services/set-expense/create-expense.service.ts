@@ -15,7 +15,7 @@ export class CreateExpenseService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   setExpenseInfo(body: any): Observable<APIResponse> {
-    console.log(JSON.stringify(body));
+    // console.log(JSON.stringify(body));
 
     let isSuccessful = false;
 

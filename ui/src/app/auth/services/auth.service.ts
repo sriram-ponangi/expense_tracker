@@ -32,7 +32,7 @@ export class AuthService {
 
   getAuthToken(): string {
     let authToken: string = "";
-    console.log("this.isLoggedIn() ", this.isLoggedIn());
+    // console.log("this.isLoggedIn() ", this.isLoggedIn());
     var userPool = new CognitoUserPool(this.poolData);
     var cognitoUser = userPool.getCurrentUser();
 

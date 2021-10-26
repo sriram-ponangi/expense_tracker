@@ -44,7 +44,7 @@ export class AddExpenseFormComponent implements OnInit {
     this.setDefaultValues();
 
     this.expenseDataValidationErrors = this.expenseDataValidator(this.addExpenseForm.value);
-    console.log(this.expenseDataValidationErrors.length);
+    // console.log(this.expenseDataValidationErrors.length);
 
     if (this.expenseDataValidationErrors.length > 0) {
       this.hasApiError = false;
@@ -58,16 +58,16 @@ export class AddExpenseFormComponent implements OnInit {
       //   this.addExpenseForm.value.reason, this.addExpenseForm.value.cost);
 
       // let apiRequest: ExpensesInfo = new ExpensesInfo(new Date(this.addExpenseForm.value.date), [expense]);
-      console.log(this.addExpenseForm.value);
+      // console.log(this.addExpenseForm.value);
 
       this.setExpenseService.setExpenseInfo(this.addExpenseForm.value).subscribe(response => {
 
         if (response.responseType === "SUCCESS") {
-          console.log(this.apiSuccessResponseMessage);
+          // console.log(this.apiSuccessResponseMessage);
           this.hasApiError = false;
           this.isApiLoading = false;
           this.apiSuccessResponseMessage = response.data.message;
-          console.log(this.apiSuccessResponseMessage);
+          // console.log(this.apiSuccessResponseMessage);
 
 
         } else {

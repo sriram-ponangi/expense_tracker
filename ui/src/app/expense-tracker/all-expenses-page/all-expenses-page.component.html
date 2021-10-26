@@ -26,7 +26,14 @@
             </div>
 
             <div class=" d-grid">
-                <button type="button" class="btn btn-dark " (click)="loadExpenseTableInfo()"> Show </button>
+                <button class="btn btn-dark" type="submit" disabled *ngIf="isApiLoading; else apiResponseLoadedButton">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Fetching Expenses...
+                </button>
+                <ng-template #apiResponseLoadedButton>
+                    <button type="button" class="btn btn-dark " (click)="loadExpenseTableInfo()"> Show All
+                        Expenses</button>
+                </ng-template>
             </div>
         </div>
         <hr />
