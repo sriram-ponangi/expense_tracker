@@ -1,43 +1,88 @@
 <div class="card shadow-lg ">
+
+
+
+
+
+
+
     <div class="card-header">
-        
-        <h1  style="font-weight: bold">Add Expense:</h1>
+
+        <h1 style="font-weight: bold">Add Expense:</h1>
     </div>
     <div class="card-body">
 
-    <form>       
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">Reason</span>
-            <input type="text" class="form-control" id="reason" aria-describedby="basic-addon3" required>
+        <div *ngIf="hasApiError; else apiSuccessMessage">
+            <div *ngFor="let errorMessage of apiErrorResponseMessages">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>ERROR: </strong>{{errorMessage}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
         </div>
+        <ng-template #apiSuccessMessage>
+            <div *ngIf="apiSuccessResponseMessage.length > 0">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success:</strong> {{apiSuccessResponseMessage}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </ng-template>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">Cost</span>            
-            <input type="number" min="0.01"
-             step="0.01" class="form-control" id="cost" aria-describedby="basic-addon3" required>
-        </div>
+        <form (ngSubmit)="addExpense()" [formGroup]="addExpenseForm">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Reason</span>
+                <input type="text" class="form-control" id="reason" aria-describedby="basic-addon3"
+                    formControlName="reason" required>
+            </div>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">Category</span>           
-            <select id="category" class="form-control" aria-describedby="basic-addon3" required>
-                <option value="volvo">Groceries</option>
-                <option value="saab">Home</option>
-                <option value="mercedes">Uncommon</option>
-                <option value="audi">Futile</option>
-              </select>
-        </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Cost</span>
+                <input type="number" min="0.01" step="0.01" class="form-control" id="cost"
+                    aria-describedby="basic-addon3" formControlName="cost" required>
+            </div>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">Date</span>            
-            <input type="date" class="form-control" id="date" aria-describedby="basic-addon3" required>
-        </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Category</span>
+                <select id="category" class="form-control" aria-describedby="basic-addon3" formControlName="category"
+                    required>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Home">Home</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Futile">Futile</option>
+                </select>
+            </div>
 
-        <div class="d-grid mb-3"> 
-            <button type="button" class="btn btn-dark">  Save  </button>
-        </div>       
-      
-    </form>       
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Date</span>
+                <input type="date" class="form-control" id="date" aria-describedby="basic-addon3" formControlName="date"
+                    required>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button class="btn btn-dark" type="submit" disabled *ngIf="isApiLoading; else apiResponseLoaded">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Saving Expense...
+                </button>
+                <ng-template #apiResponseLoaded>
+                    <button type="submit" class="btn btn-dark"> Save Expense </button>
+                </ng-template>
+            </div>
+
+
+
+        </form>
+
+        <ul class="list-group" *ngIf="expenseDataValidationErrors.length > 0">
+            <span *ngFor="let msg of expenseDataValidationErrors">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{msg}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </span>
+        </ul>
+
 
     </div>
-    
+
 </div>

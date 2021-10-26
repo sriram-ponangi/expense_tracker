@@ -13,11 +13,13 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   
   { path: 'all-expenses', component: AllExpensesPageComponent, canActivate : [AuthGuardGuard] },
-  { path: 'home',  redirectTo: '/' },
-  { path: '', component: HomePageComponent, canActivate : [AuthGuardGuard] },
+  { path: 'home', component: HomePageComponent, canActivate : [AuthGuardGuard] },
+  { path: '',  redirectTo: '/home', pathMatch: 'full' },
 
   {path: '404', component: PageNotFoundComponent, canActivate : [AuthGuardGuard]},
-  {path: '**', redirectTo: '/404' }
+  {path: '**', redirectTo: '/404' },
+
+  
   
 ];
 
