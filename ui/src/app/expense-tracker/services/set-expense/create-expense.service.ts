@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { environment } from 'src/environments/environment';
 import { APIResponse } from '../../models/APIResponse';
 import { ExpensesInfo } from '../../models/ExpensesInfo';
 
@@ -10,12 +11,9 @@ import { ExpensesInfo } from '../../models/ExpensesInfo';
 })
 export class CreateExpenseService {
 
-  private setExpensesAPIEndpoint: string = '/dev';
-
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   setExpenseInfo(body: any): Observable<APIResponse> {
-    // console.log(JSON.stringify(body));
 
     let isSuccessful = false;
 
@@ -24,7 +22,7 @@ export class CreateExpenseService {
 
     const options = { headers: headers };
 
-    return this.http.post<APIResponse>(this.setExpensesAPIEndpoint, body, options);
+    return this.http.post<APIResponse>(environment.api, body, options);
 
   }
 }

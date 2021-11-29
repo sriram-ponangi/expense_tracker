@@ -38,8 +38,8 @@ export class SignUpComponent implements OnInit {
     if (form.valid) {
       this.isLoading = true;
       let poolData: ICognitoUserPoolData = {
-        UserPoolId: environment.cognitoUserPoolId, // Your user pool id here
-        ClientId: environment.cognitoAppClientId // Your client id here
+        UserPoolId: environment.cognitoUserPoolId,
+        ClientId: environment.cognitoAppClientId
       };
       
       let userPool = new CognitoUserPool(poolData);
@@ -59,19 +59,19 @@ export class SignUpComponent implements OnInit {
         attributeList.push(attrData);
       }      
 
-      userPool.signUp(this.email, this.password, attributeList, [], (
-        err,
-        result
-      ) => {
-        this.isLoading = false;
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-        // console.log(result);        
-        this.router.navigate(['/sign-in']);
-      });
+      // userPool.signUp(this.email, this.password, attributeList, [], (
+      //   err,
+      //   result
+      // ) => {
+      //   this.isLoading = false;
+      //   if (err) {
+      //     alert(err.message || JSON.stringify(err));
+      //     return;
+      //   }      
+      //   this.router.navigate(['/sign-in']);
+      // });
 
+      setTimeout(() => {console.log("this is the first message")}, 5000);
     }
   }
 
