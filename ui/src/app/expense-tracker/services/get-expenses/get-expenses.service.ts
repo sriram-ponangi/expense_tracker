@@ -4,14 +4,13 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { environment } from 'src/environments/environment';
 import { APIResponse } from '../../models/APIResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetExpensesService {
-
-  private getExpensesAPIEndpoint: string = '/dev';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -27,7 +26,7 @@ export class GetExpensesService {
     .set('Authorization', this.authService.getAuthToken());
 
     const options = { params: params, headers: headers };
-
-    return this.http.get<APIResponse>(this.getExpensesAPIEndpoint, options);
+    environment.api
+    return this.http.get<APIResponse>(environment.api, options);
   }
 }
