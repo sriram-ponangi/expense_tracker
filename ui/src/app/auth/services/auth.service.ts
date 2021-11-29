@@ -22,9 +22,12 @@ export class AuthService {
     if (cognitoUser != null) {
       cognitoUser.getSession((err: any, session: any) => {
         if (err) {
-          alert(err.message || JSON.stringify(err));
+          console.error(err.message || JSON.stringify(err));
         }
-        isAuth = session.isValid();
+        if(session ) {
+          isAuth = session?.isValid();
+        }
+        
       })
     }
     return isAuth;
@@ -39,9 +42,9 @@ export class AuthService {
     if (cognitoUser != null) {
       cognitoUser.getSession((err: any, session: any) => {
         if (err) {
-          alert(err.message || JSON.stringify(err));
+          console.error(err.message || JSON.stringify(err));
         }
-        else if (session.isValid()) {
+        else if (session && session.isValid()) {
           authToken = session.getIdToken().getJwtToken();
         }
       })

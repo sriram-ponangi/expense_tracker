@@ -19,10 +19,15 @@ interface formDataInterface {
 export class SignUpComponent implements OnInit {
 
   isLoading: boolean = false;
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
+  hasFailedSignUp: boolean = false;
+  hasSucceededSignUp: boolean = false;
+  signUpStatusMessage: string = '';
+  user = {
+    name:  '',
+    email:  '',
+    password:  '',
+  }
+  
 
 
   constructor(private router: Router) { }
@@ -35,6 +40,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignup(form: NgForm) {
+    
     if (form.valid) {
       this.isLoading = true;
       let poolData: ICognitoUserPoolData = {
@@ -46,8 +52,8 @@ export class SignUpComponent implements OnInit {
       
       var attributeList: CognitoUserAttribute [] = [];
       let formData: formDataInterface = {
-        "name": this.name,
-        "email": this.email
+        "name": this.user.name,
+        "email": this.user.email
       }
 
       for (let key in formData) {
@@ -59,20 +65,32 @@ export class SignUpComponent implements OnInit {
         attributeList.push(attrData);
       }      
 
-      // userPool.signUp(this.email, this.password, attributeList, [], (
-      //   err,
-      //   result
-      // ) => {
-      //   this.isLoading = false;
-      //   if (err) {
-      //     alert(err.message || JSON.stringify(err));
-      //     return;
-      //   }      
-      //   this.router.navigate(['/sign-in']);
-      // });
+      userPool.signUp(this.user.email, this.user.password, attributeList, [], (
+        err,
+        result
+      ) => {
+        this.isLoading = false;
+        if (err) {
+          // alert(err.message || JSON.stringify(err));
+          this.hasSucceededSignUp = false;
+          this.hasFailedSignUp = true;
+          this.signUpStatusMessage = err.message
+          return;
+        }      
+        this.hasSucceededSignUp = true;
+        this.hasFailedSignUp = false;
+        this.signUpStatusMessage = 'New user account is created. Please click on the verification link sent your email id.'
 
-      setTimeout(() => {console.log("this is the first message")}, 5000);
+        // this.router.navigate(['/sign-in']);
+      });
+
+      // setTimeout(() => {console.log("this is the first message")}, 5000);
+    } else {
+      this.hasSucceededSignUp = false;
+      this.hasFailedSignUp = true;
+      this.signUpStatusMessage = "Please fill your details correctly and then click on submit."
     }
+
   }
 
 }

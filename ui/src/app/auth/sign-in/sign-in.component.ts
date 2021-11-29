@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class SignInComponent implements OnInit {
   isLoading: boolean = false;
+  hasFailedSignIn: boolean = false;
+  failedSignInErrorMessage: string = "";
   email: string = '';
   password: string = '';
 
@@ -50,6 +52,7 @@ export class SignInComponent implements OnInit {
           this.router.navigate(["home"])
         },
         onFailure: (err) => {
+          
           let error_message = err.message || JSON.stringify(err);
 
           if (err.code === 'UserNotConfirmedException') {
@@ -64,7 +67,9 @@ export class SignInComponent implements OnInit {
               }
             });
           }
-          alert(error_message);
+          this.hasFailedSignIn = true;
+          this.failedSignInErrorMessage = error_message;
+          console.error(error_message);
           this.isLoading = false;
         },
       });
