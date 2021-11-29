@@ -15,6 +15,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ChartsModule } from 'ng2-charts';
+import { ExpenseOverTimeChartComponent } from './expense-tracker/home-page/expense-over-time-chart/expense-over-time-chart.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ChartsModule } from 'ng2-charts';
     SignUpComponent,
     ForgotPasswordComponent,
     NavBarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ExpenseOverTimeChartComponent
   ],
   imports: [
     BrowserModule,
