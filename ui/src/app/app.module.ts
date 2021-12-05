@@ -16,6 +16,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ChartsModule } from 'ng2-charts';
 import { ExpenseOverTimeChartComponent } from './expense-tracker/home-page/expense-over-time-chart/expense-over-time-chart.component';
+import { CostSummaryComponent } from './expense-tracker/common/cost-summary/cost-summary.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ExpenseOverTimeChartComponent } from './expense-tracker/home-page/expen
     ForgotPasswordComponent,
     NavBarComponent,
     PageNotFoundComponent,
-    ExpenseOverTimeChartComponent
+    ExpenseOverTimeChartComponent,
+    CostSummaryComponent
   ],
   imports: [
     BrowserModule,

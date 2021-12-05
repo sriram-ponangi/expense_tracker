@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Chart, ChartDataSets, ChartOptions, ChartType, RadialChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { GetExpensesService } from '../../services/get-expenses/get-expenses.service';
-
+import { Output, EventEmitter } from '@angular/core';
 
 
 
@@ -13,6 +13,8 @@ import { GetExpensesService } from '../../services/get-expenses/get-expenses.ser
   styleUrls: ['./expenses-pie-chart.component.css']
 })
 export class ExpensesPieChartComponent implements OnInit {
+
+  @Output() expenseSummaryEvent = new EventEmitter<number[]>();
 
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
@@ -83,6 +85,8 @@ export class ExpensesPieChartComponent implements OnInit {
             Number(response.data?.uncommon),
             Number(response.data?.futile)
           ]; 
+
+          this.expenseSummaryEvent.emit(this.pieChartData);
         }
       }, error => {
         console.error(error);

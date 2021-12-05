@@ -11,3 +11,4 @@
 - Remove the StartDate, EndDate, and Show form into a separate component. Then use it in both PieChart and Table components. Figure out how to pass the form data from the common component to the other two components
 
 - ng g c expense-tracker/home-page/expense-over-time-chart
+- ng g c expense-tracker/common/cost-summary

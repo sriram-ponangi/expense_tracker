@@ -1,0 +1,71 @@
+<div class="card shadow-lg ">
+    <div class="card-header">
+        <h1 style="font-weight: bold">Expense Summary:</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-xs-6">
+            <div class="card-body">
+                <div class="card text-white bg-dark">
+                    <div class="card-header">
+                        <h5 class="card-title">TOTAL EXPENSES:</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{expenseSummaryInput.total}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xs-6">
+            <div class="card-body">
+                <div class="card text-black bg-info">
+                    <div class="card-header">
+                        <h5 class="card-title">HOME:</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{expenseSummaryInput.home}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xs-6">
+            <div class="card-body">
+                <div class="card text-white bg-success">
+                    <div class="card-header">
+                        <h5 class="card-title">GROCERIES</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{expenseSummaryInput.groceries}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xs-6">
+            <div class="card-body">
+                <div class="card text-black bg-warning">
+                    <div class="card-header">
+                        <h5 class="card-title">UNCOMMON</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{expenseSummaryInput.uncommon}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-2 col-xs-6">
+            <div class="card-body">
+                <div class="card text-white bg-danger">
+                    <div class="card-header">
+                        <h5 class="card-title">FUTILE</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{expenseSummaryInput.futile}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

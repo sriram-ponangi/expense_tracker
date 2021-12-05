@@ -1,11 +1,19 @@
 <div class="row mb-3">
 
-    <div class="col-md-6 mb-3">
-      <app-add-expense-form></app-add-expense-form>
-    </div>
+  <div class="col-md-4 col-xs-12">
+    <app-add-expense-form></app-add-expense-form>
+  </div>
 
-    <div class="col-md-6 mb-3">
-      <app-expenses-pie-chart></app-expenses-pie-chart>
-    </div>
+  <div class="col-md-8 col-xs-12">
+    <app-cost-summary [expenseSummaryInput] = "expenseSummary"></app-cost-summary>
+  </div>
+</div>
 
+<div class="row mb-3">
+  <app-expenses-pie-chart (expenseSummaryEvent)="expenseSummaryEventListener($event)"></app-expenses-pie-chart>
+</div>
+
+
+<div class="row mb-3">
+  <app-expense-over-time-chart></app-expense-over-time-chart>
 </div>
