@@ -25,8 +25,8 @@ export class HomePageComponent implements OnInit {
   expenseSummaryEventListener(expenses: number[]){
 
     this.expenseSummary.total =  expenses.reduce((a, b)=>a + b, 0);
-    this.expenseSummary.groceries = expenses[0];
-    this.expenseSummary.home = expenses[1];
+    this.expenseSummary.home = expenses[0];
+    this.expenseSummary.groceries = expenses[1];
     this.expenseSummary.uncommon = expenses[2];
     this.expenseSummary.futile = expenses[3];
 

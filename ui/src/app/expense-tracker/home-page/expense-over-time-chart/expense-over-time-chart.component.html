@@ -1,4 +1,4 @@
-<div class="card shadow-lg container-fluid ">
+<!-- <div class="card shadow-lg container-fluid ">
 
     <div class="card-header mb-2">
         <h1 style="font-weight: bold">Monthly Expenses Summary:</h1>
@@ -11,7 +11,6 @@
                 <span class="input-group-text" id="basic-addon3">Start Month</span>
                 <input type="month" class="form-control" id="startDate" aria-describedby="basic-addon3"
                     [formControl]="startDateObject" required>
-                <!-- [value]="startDateObject.value | date: 'yyyy-MM-dd' "> -->
             </div>
         </div>
 
@@ -21,7 +20,6 @@
                 <span class="input-group-text" id="basic-addon3">End Month</span>
                 <input type="month" class="form-control" id="endDate" aria-describedby="basic-addon3"
                     [formControl]="endDateObject" required>
-                <!-- [value]="startDateObject.value | date: 'yyyy-MM-dd' "> -->
             </div>
         </div>
 
@@ -52,24 +50,30 @@
                 </div>
             </div>
             <ng-template #successResponse>
-                <div *ngIf="isBarChartDataEmpty(); else showPieChart">
+                <div *ngIf="isBarChartDataEmpty(); else showBarChart">
                     <div class="alert alert-info" role="alert">
                         Expense information not available for the selected date range.
                     </div>
                 </div>
             </ng-template>
-            <ng-template #showPieChart>
-                <!-- <div class="chart">
+            <ng-template #showBarChart>
+                 <div class="chart">
                     <canvas baseChart [data]="barChartData" [labels]="barChartLabels" [chartType]="barChartType"
                         [options]="barChartOptions"  style="height:500px;">
                     </canvas>
-                </div> -->
+                </div> 
 
-                
+               
+
             </ng-template>
         </ng-template>
     </div>
 
     <div class="card-footer mb-5"> </div>
 
+</div> -->
+
+<div class="card">
+    <h5>Stacked</h5>
+    <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
 </div>

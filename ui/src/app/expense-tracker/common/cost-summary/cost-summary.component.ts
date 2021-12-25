@@ -9,8 +9,8 @@ export class CostSummaryComponent implements OnInit {
 
   @Input() expenseSummaryInput = {
     total :  0,
-    groceries: 0,
     home:  0,
+    groceries: 0,
     uncommon: 0,
     futile: 0
   };
