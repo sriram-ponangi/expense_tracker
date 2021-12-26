@@ -61,7 +61,7 @@ export class ExpensesPieChartComponent implements OnInit {
     this.isApiLoading = true;
     this.hasApiError = false;
 
-    this.getExpenseService.getExpenseDetails(this.startDateObject.value, this.endDateObject.value, "AGGREGATE")
+    this.getExpenseService.getExpenseDetailsByDateRange(this.startDateObject.value, this.endDateObject.value, "AGGREGATE")
 
       .subscribe(response => {
         if (response.responseType === "SUCCESS") {

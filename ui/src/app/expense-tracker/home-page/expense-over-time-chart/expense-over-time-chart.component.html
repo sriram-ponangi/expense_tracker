@@ -1,4 +1,4 @@
-<!-- <div class="card shadow-lg container-fluid ">
+<div class="card shadow-lg container-fluid ">
 
     <div class="card-header mb-2">
         <h1 style="font-weight: bold">Monthly Expenses Summary:</h1>
@@ -29,8 +29,8 @@
                 Fetching Expense History...
             </button>
             <ng-template #apiResponseLoadedButton>
-                <button type="button" class="btn btn-dark" (click)="loadExpenseHistoryBarChartData()"> Show Expenses
-                    History
+                <button type="button" class="btn btn-dark" (click)="loadExpenseHistoryBarChartData()"> 
+                    Show Expenses History
                 </button>
             </ng-template>
         </div>
@@ -57,23 +57,11 @@
                 </div>
             </ng-template>
             <ng-template #showBarChart>
-                 <div class="chart">
-                    <canvas baseChart [data]="barChartData" [labels]="barChartLabels" [chartType]="barChartType"
-                        [options]="barChartOptions"  style="height:500px;">
-                    </canvas>
-                </div> 
-
-               
-
+                <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
             </ng-template>
         </ng-template>
     </div>
 
     <div class="card-footer mb-5"> </div>
 
-</div> -->
-
-<div class="card">
-    <h5>Stacked</h5>
-    <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
 </div>

@@ -1,169 +1,184 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { GetExpensesService } from '../../services/get-expenses/get-expenses.service';
 
 
 
 
 @Component({
-  selector: 'app-expense-over-time-chart',
-  templateUrl: './expense-over-time-chart.component.html',
-  styleUrls: ['./expense-over-time-chart.component.css']
+    selector: 'app-expense-over-time-chart',
+    templateUrl: './expense-over-time-chart.component.html',
+    styleUrls: ['./expense-over-time-chart.component.css']
 })
 export class ExpenseOverTimeChartComponent implements OnInit {
 
-  // hasApiError: boolean;
-  // isApiLoading: boolean;
+    hasApiError: boolean;
+    isApiLoading: boolean;
 
-  // startDateObject: FormControl;
-  // endDateObject: FormControl;
+    startDateObject: FormControl;
+    endDateObject: FormControl;
 
-  // barChartLabels: string[] = ['expenses'];
-  // public barChartData: any = {};
-
-
-  // barChartType: string = 'bar';
-  // barChartOptions: any = {
-  //   responsive: true,
-
-  // };
-
-  // constructor() {
-  //   this.hasApiError = false;
-  //   this.isApiLoading = true;
-
-  //   let today = new Date();
-  //   this.startDateObject = new FormControl(today.getFullYear() + "-01");
-  //   this.endDateObject = new FormControl(today.getFullYear() + "-12");
-  // }
-
-  // ngOnInit(): void {
-  //   this.isBarChartDataEmpty();
-  //   if (this.isBarChartDataEmpty()) {
-  //     this.isApiLoading = false;
-  //     this.hasApiError = false;
-  //   }
-  // }
-
-  // loadExpenseHistoryBarChartData() {
-  //   this.isApiLoading = true;
-  //   this.hasApiError = false;
-  //   let startMonthString = this.startDateObject.value.split("-");
-  //   let endMonthString = this.startDateObject.value.split("-");
-  //   console.log(new Date(Number(startMonthString[0]), Number(startMonthString[1]), 1));
-  //   console.log(new Date(Number(endMonthString[0]), Number(endMonthString[1]), 0));
+    stackedData: any;
+    stackedOptions: any;
 
 
-  //   // API CALL and FILL CHART DATA
-  //   this.barChartData = {
-  //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  //     datasets: [
-  //       {
-  //         label: 'First Dataset',
-  //         data: [65, 59, 80, 81, 56, 55, 40]
-  //       },
-  //       {
-  //         label: 'Second Dataset',
-  //         data: [28, 48, 40, 19, 86, 27, 90]
-  //       }
-  //     ]
-  //   };
+    chartLabels: string[];
+    homeExpenses: number[];
+    groceryExpenses: number[];
+    uncommonExpense: number[];
+    futileExpenses: number[];
+    averageExpense: number[];
 
 
-  //   this.isApiLoading = false;
+    constructor(private getExpenseService: GetExpensesService) {
+        this.hasApiError = false;
+        this.isApiLoading = true;
 
-  // }
+        this.chartLabels = [];
+        this.homeExpenses = [];
+        this.groceryExpenses = [];
+        this.uncommonExpense = [];
+        this.futileExpenses = [];
+        this.averageExpense = [];
 
-// isBarChartDataEmpty() {
-//   return (this.barChartData.length == 0) || (this.barChartData.every(item => item === 0));
-// }
-isBarChartDataEmpty() {
-  return false;
-}
-ngOnInit(): void {
-}
+        let today = new Date();
+        this.startDateObject = new FormControl(today.getFullYear() + "-01");
+        this.endDateObject = new FormControl(today.getFullYear() + "-12");
+        this.setStackerBarChartOptions();
 
-stackedData: any;
-stackedOptions: any;
-constructor() {
-  this.stackedData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-        type: 'bar',
-        label: 'Dataset 1',
-        backgroundColor: '#42A5F5',
-        data: [
-            50,
-            25,
-            12,
-            48,
-            90,
-            76,
-            42
-        ]
-    }, {
-        type: 'bar',
-        label: 'Dataset 2',
-        backgroundColor: '#66BB6A',
-        data: [
-            21,
-            84,
-            24,
-            75,
-            37,
-            65,
-            34
-        ]
-    }, {
-        type: 'bar',
-        label: 'Dataset 3',
-        backgroundColor: '#FFA726',
-        data: [
-            41,
-            52,
-            24,
-            74,
-            23,
-            21,
-            32
-        ]
-    }]
-};
+    }
 
-this.stackedOptions = {
-  plugins: {
-      legend: {
-          labels: {
-              color: '#ebedef'
-          }
-      },
-      tooltips: {
-          mode: 'index',
-          intersect: false
-      }
-  },
-  scales: {
-      x: {
-          stacked: true,
-          ticks: {
-              color: '#ebedef'
-          },
-          grid: {
-              color: 'rgba(255,255,255,0.2)'
-          }
-      },
-      y: {
-          stacked: true,
-          ticks: {
-              color: '#ebedef'
-          },
-          grid: {
-              color: 'rgba(255,255,255,0.2)'
-          }
-      }
-  }
-};
+    ngOnInit(): void {
+        this.loadExpenseHistoryBarChartData();
+
+        if (this.isBarChartDataEmpty()) {
+            this.isApiLoading = false;
+            this.hasApiError = false;
+            return;
+        }
 
 
-}
+    }
+
+
+    isBarChartDataEmpty() {
+        console.log(this.chartLabels);
+        return (this.chartLabels.length == 0);
+    }
+
+
+    loadExpenseHistoryBarChartData() {
+        this.setEmptyData();
+        this.isApiLoading = true;
+        this.hasApiError = false;
+
+        this.getExpenseService.getMonthlyExpenseHistoryByDateRange(this.startDateObject.value, this.endDateObject.value)
+
+            .subscribe(next => {
+                if (next.responseType === "SUCCESS") {
+                    let monthlyExpensesList = next.data;
+                    for (let expense in monthlyExpensesList) {
+                        this.chartLabels.push(monthlyExpensesList[expense].month);
+                        this.homeExpenses.push(monthlyExpensesList[expense].home);
+                        this.groceryExpenses.push(monthlyExpensesList[expense].groceries);
+                        this.uncommonExpense.push(monthlyExpensesList[expense].uncommon);
+                        this.futileExpenses.push(monthlyExpensesList[expense].futile);
+
+                        let total = monthlyExpensesList[expense].home + monthlyExpensesList[expense].groceries + monthlyExpensesList[expense].uncommon + monthlyExpensesList[expense].futile;
+                        this.averageExpense.push(total);
+                    }
+
+                    const sum = this.averageExpense.reduce((a, b) => a + b, 0);
+                    const avg = (sum / this.averageExpense.length) || 0;
+                    this.averageExpense.forEach((name, index) => this.averageExpense[index] = avg);
+
+                    this.stackedData = {
+                        labels: this.chartLabels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: 'Average Expense',
+                                data: this.averageExpense,
+                                fill: true,
+                                borderColor: '#FFA726',
+                                tension: .4,
+                                backgroundColor: 'rgba(255,167,38,0.2)'
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Home',
+                                backgroundColor: "#0dcaf0",
+                                data: this.homeExpenses
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Groceries',
+                                backgroundColor: "#198754",
+                                data: this.groceryExpenses
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Uncommon',
+                                backgroundColor: "#ffc107",
+                                data: this.uncommonExpense
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Futile',
+                                backgroundColor: "#dc3545",
+                                data: this.futileExpenses
+                            },
+                        ]
+                    }
+
+                }
+            }, error => {
+                console.error(error);
+                this.hasApiError = true;
+                this.isApiLoading = false;
+            }, () => { // complete
+                this.isApiLoading = false;
+            });
+    }
+
+    setEmptyData() {
+        this.averageExpense = [];
+        this.chartLabels = [];
+        this.homeExpenses = [];
+        this.groceryExpenses = [];
+        this.uncommonExpense = [];
+        this.futileExpenses = [];
+    }
+
+
+
+
+
+
+
+
+    setStackerBarChartOptions() {
+        this.stackedOptions = {
+            plugins: {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                }
+            },
+            responsive: true,
+
+            scales: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    stacked: true,
+                }
+            }
+        };
+    }
+
+
+
 
 }
