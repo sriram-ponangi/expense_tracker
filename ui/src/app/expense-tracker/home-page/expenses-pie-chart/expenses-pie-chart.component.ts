@@ -107,7 +107,6 @@ export class ExpensesPieChartComponent implements OnInit {
   }
 
   isPieChartDataEmpty() {
-    console.log(this.pieChartData);
     return (this.pieChartData.length == 0) || (this.pieChartData.every(item => item === 0));
   }
 

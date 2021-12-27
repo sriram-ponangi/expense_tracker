@@ -3,8 +3,6 @@ import { FormControl } from '@angular/forms';
 import { GetExpensesService } from '../../services/get-expenses/get-expenses.service';
 
 
-
-
 @Component({
     selector: 'app-expense-over-time-chart',
     templateUrl: './expense-over-time-chart.component.html',
@@ -62,7 +60,6 @@ export class ExpenseOverTimeChartComponent implements OnInit {
 
 
     isBarChartDataEmpty() {
-        console.log(this.chartLabels);
         return (this.chartLabels.length == 0);
     }
 
@@ -71,22 +68,33 @@ export class ExpenseOverTimeChartComponent implements OnInit {
         this.setEmptyData();
         this.isApiLoading = true;
         this.hasApiError = false;
+        console.log(this.startDateObject.value, this.endDateObject.value);
+        console.log(new Date(parseInt(this.startDateObject.value.substring(0, 4)), this.startDateObject.value.substring(5, 7), 1));
+        console.log(new Date(parseInt(this.endDateObject.value.substring(0, 4)), this.endDateObject.value.substring(5, 7), 0));
+        console.log(parseInt(this.startDateObject.value.substring(0, 4)), this.startDateObject.value.substring(5, 7), 1);
+        console.log(parseInt(this.endDateObject.value.substring(0, 4)), this.endDateObject.value.substring(5, 7), 0);
 
         this.getExpenseService.getMonthlyExpenseHistoryByDateRange(this.startDateObject.value, this.endDateObject.value)
 
             .subscribe(next => {
                 if (next.responseType === "SUCCESS") {
                     let monthlyExpensesList = next.data;
-                    for (let expense in monthlyExpensesList) {
-                        this.chartLabels.push(monthlyExpensesList[expense].month);
-                        this.homeExpenses.push(monthlyExpensesList[expense].home);
-                        this.groceryExpenses.push(monthlyExpensesList[expense].groceries);
-                        this.uncommonExpense.push(monthlyExpensesList[expense].uncommon);
-                        this.futileExpenses.push(monthlyExpensesList[expense].futile);
+                    for (let month in monthlyExpensesList) {
+                        console.log(monthlyExpensesList[month]);
+                        console.log(monthlyExpensesList[month].futile);
 
-                        let total = monthlyExpensesList[expense].home + monthlyExpensesList[expense].groceries + monthlyExpensesList[expense].uncommon + monthlyExpensesList[expense].futile;
-                        this.averageExpense.push(total);
+
+                        this.chartLabels.push(month);
+                        this.homeExpenses.push(monthlyExpensesList[month].home);
+                        this.groceryExpenses.push(monthlyExpensesList[month].groceries);
+                        this.uncommonExpense.push(monthlyExpensesList[month].uncommon);
+                        this.futileExpenses.push(monthlyExpensesList[month].futile);
+
+                        let total = monthlyExpensesList[month].home + monthlyExpensesList[month].groceries + monthlyExpensesList[month].uncommon + monthlyExpensesList[month].futile;
+                        this.averageExpense.push(Number(total.toFixed(2)));
+
                     }
+                    
 
                     const sum = this.averageExpense.reduce((a, b) => a + b, 0);
                     const avg = (sum / this.averageExpense.length) || 0;
@@ -149,13 +157,6 @@ export class ExpenseOverTimeChartComponent implements OnInit {
         this.uncommonExpense = [];
         this.futileExpenses = [];
     }
-
-
-
-
-
-
-
 
     setStackerBarChartOptions() {
         this.stackedOptions = {
