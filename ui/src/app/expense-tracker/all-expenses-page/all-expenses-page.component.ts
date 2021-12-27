@@ -38,7 +38,7 @@ export class AllExpensesPageComponent implements OnInit {
     this.isApiLoading = true;
     this.hasApiError = false;
 
-    this.getExpenseService.getExpenseDetails(this.startDateObject.value, this.endDateObject.value, "DETAILED")
+    this.getExpenseService.getExpenseDetailsByDateRange(this.startDateObject.value, this.endDateObject.value, "DETAILED")
       .subscribe(
         response => {
           if (response.responseType === "SUCCESS") {

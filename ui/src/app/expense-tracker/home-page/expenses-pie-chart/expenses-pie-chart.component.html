@@ -1,4 +1,4 @@
-<div class="card shadow-lg ">
+<div class="card shadow-lg">
 
     <div class="card-header">
         <h1 style="font-weight: bold">Graph:</h1>
@@ -59,10 +59,7 @@
                 </ng-template>
                 <ng-template #showPieChart>
                     <div class="chart">
-                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-                            [options]="pieChartOptions" [colors]="pieChartColors" [legend]="pieChartLegend"
-                            style="height:500px;">
-                        </canvas>
+                        <p-chart type="doughnut" [data]="pieChartDetails"  [responsive]="true" [options]="chartOptions"></p-chart>
                     </div>
                 </ng-template>
             </ng-template>
@@ -70,6 +67,6 @@
 
     </div>
 
-    <div class="card-footer mb-5"> </div>
+    <!-- <div class="card-footer mb-5"> </div> -->
 
 </div>

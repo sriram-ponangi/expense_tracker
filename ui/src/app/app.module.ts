@@ -14,10 +14,9 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ChartsModule } from 'ng2-charts';
 import { ExpenseOverTimeChartComponent } from './expense-tracker/home-page/expense-over-time-chart/expense-over-time-chart.component';
 import { CostSummaryComponent } from './expense-tracker/common/cost-summary/cost-summary.component';
-
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,7 @@ import { CostSummaryComponent } from './expense-tracker/common/cost-summary/cost
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
