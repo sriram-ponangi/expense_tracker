@@ -61,7 +61,6 @@ export class SignUpComponent implements OnInit {
           Name: key,
           Value: formData[key]
         });
-        let attribute = new CognitoUserAttribute(attrData);
         attributeList.push(attrData);
       }      
 
