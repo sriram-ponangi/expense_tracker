@@ -10,6 +10,11 @@
               "cost": 93.56
             },
             {
+              "category": "Vehicle",
+              "reason": "Loan",
+              "cost": 640.11
+            },
+            {
               "category": "Home",
               "reason": "Rent - SP",
               "cost": 393.36
@@ -58,6 +63,11 @@
               "category": "Futile",
               "reason": "Pizza - PizzaPiza",
               "cost": "24.56"
+            },
+            {
+              "category": "Vehicle",
+              "reason": "Loan",
+              "cost": 640.11
             },
             {
               "category": "Groceries",

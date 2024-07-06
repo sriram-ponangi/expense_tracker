@@ -1,7 +1,3 @@
-/*
-* Lambda Funtion to create an expense item in dynamoDB
-*/
-
 const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient();
 //----------------------------------------------------------------------------------------------------------------
@@ -9,15 +5,23 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 //----------------------------------------------------------------------------------------------------------------
 exports.handler = async (event, context) => {
     console.log(event);
-    let expenseData = event.body;//JSON.parse(event.body);
-
+    let expenseData = JSON.parse(event.body); // event.body;
+    
     let errorMessages = expenseDataValidator(expenseData);
     if (errorMessages.length > 0) {
-        return { error: errorMessages };
+        const finalResponse = new FinalResponse('Error: Bad Request', errorMessages, undefined);
+        return {
+            statusCode: '400',
+            body: JSON.stringify(finalResponse),
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        };
     }
 
     let insertItem = {
-        "user_id": '1e952ad7-b87e-41cf-8d36-7d99b54813c9',// event?.requestContext?.authorizer?.claims?.sub,
+        "user_id":  event?.requestContext?.authorizer?.claims?.sub, // '1e952ad7-b87e-41cf-8d36-7d99b54813c9',
         "date": expenseData.date,
         "expenses": [
             {
@@ -29,19 +33,37 @@ exports.handler = async (event, context) => {
 
     };
     console.log(insertItem);
-
+    
     try {
 
         const data = await createItem(insertItem);
 
-        const resp = {
-            // userEvent: event,
-            // userContext: context,
-            "message": "INSERT SUCESSFUL"
+        const response = {
+            "message": "Inserted '"+ expenseData.reason + "' at " + expenseData.date
         }
-        return { body: JSON.stringify(resp) };
+        
+        const finalResponse = new FinalResponse('SUCCESS', undefined, response);
+        return {
+            statusCode: '200',
+            body: JSON.stringify(finalResponse),
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        };
+        
+        
+        
     } catch (err) {
-        return { error: err };
+        const finalResponse = new FinalResponse('ERROR', [err.message], undefined);
+        return {
+            statusCode: '500',
+            body: JSON.stringify(finalResponse),
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        };
     }
 }
 //----------------------------------------------------------------------------------------------------------------
@@ -55,27 +77,27 @@ function expenseDataValidator(data) {
 
     let date = new Date(data.date);
     let isvalidDate = data.date && date.toString() !== 'Invalid Date';
-    if (!isvalidDate) {
+    if(!isvalidDate) {
         errorMessages.push("Invalid Date. The date must be in 'YYYY-MM-DD' format");
-    }
+    } 
 
-    let isValidCategory = ['Home', 'Futile', 'Groceries', 'Uncommon'].includes(data.category);
-    if (!isValidCategory) {
-        errorMessages.push("Invalid Category. The category must be one of ['Home', 'Futile', 'Groceries', 'Uncommon']");
-    }
+    let isValidCategory = ['Home', 'Futile', 'Groceries', 'Uncommon', 'Vehicle'].includes(data.category);
+    if(!isValidCategory) {
+        errorMessages.push("Invalid Category. The category must be one of ['Home', 'Futile', 'Groceries', 'Uncommon', 'Vehicle']");
+    } 
 
-    let isValidReason = data.reason && data.reason.length > 0;
-    if (!isValidReason) {
+    let isValidReason = data.reason && data.reason.length > 0 ;
+    if(!isValidReason) {
         errorMessages.push("Invalid Reason. It must be a valid string");
-    }
+    } 
 
-    let isValidCost = data.cost && (Math.round((data.cost + Number.EPSILON) * 100) / 100) > 0;
-    if (!isValidCost) {
+    let isValidCost = data.cost && (Math.round((data.cost + Number.EPSILON) * 100) / 100)  > 0;
+    if(!isValidCost) {
         errorMessages.push("Invalid Cost. It must be a positive number");
-    }
+    } 
 
     return errorMessages;
-
+ 
 }
 
 async function createItem(insertItem) {
@@ -121,3 +143,26 @@ async function queryItems(userIdKey, dateKey) {
         return err;
     }
 }
+
+//----------------------------------------------------------------------------------------------------------------
+// Response Object
+//----------------------------------------------------------------------------------------------------------------
+class FinalResponse {
+
+    constructor(responseType, errorMessages, data) {
+        this.responseType = responseType;
+        this.errorMessages = errorMessages;
+        this.data = data;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+

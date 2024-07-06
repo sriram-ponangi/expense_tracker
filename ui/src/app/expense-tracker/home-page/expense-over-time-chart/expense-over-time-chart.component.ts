@@ -25,6 +25,7 @@ export class ExpenseOverTimeChartComponent implements OnInit {
     groceryExpenses: number[];
     uncommonExpense: number[];
     futileExpenses: number[];
+    vehicleExpenses: number[];
     averageExpense: number[];
 
 
@@ -37,6 +38,7 @@ export class ExpenseOverTimeChartComponent implements OnInit {
         this.groceryExpenses = [];
         this.uncommonExpense = [];
         this.futileExpenses = [];
+        this.vehicleExpenses = [];
         this.averageExpense = [];
 
         let today = new Date();
@@ -89,8 +91,9 @@ export class ExpenseOverTimeChartComponent implements OnInit {
                         this.groceryExpenses.push(monthlyExpensesList[month].groceries);
                         this.uncommonExpense.push(monthlyExpensesList[month].uncommon);
                         this.futileExpenses.push(monthlyExpensesList[month].futile);
+                        this.vehicleExpenses.push(monthlyExpensesList[month].vehicle);
 
-                        let total = monthlyExpensesList[month].home + monthlyExpensesList[month].groceries + monthlyExpensesList[month].uncommon + monthlyExpensesList[month].futile;
+                        let total = monthlyExpensesList[month].home + monthlyExpensesList[month].groceries + monthlyExpensesList[month].uncommon + monthlyExpensesList[month].futile + monthlyExpensesList[month].vehicle;
                         this.averageExpense.push(Number(total.toFixed(2)));
 
                     }
@@ -136,6 +139,12 @@ export class ExpenseOverTimeChartComponent implements OnInit {
                                 backgroundColor: "#dc3545",
                                 data: this.futileExpenses
                             },
+                            {
+                                type: 'bar',
+                                label: 'Vehicle',
+                                backgroundColor: "#a446d2",
+                                data: this.vehicleExpenses
+                            },
                         ]
                     }
 
@@ -156,6 +165,7 @@ export class ExpenseOverTimeChartComponent implements OnInit {
         this.groceryExpenses = [];
         this.uncommonExpense = [];
         this.futileExpenses = [];
+        this.vehicleExpenses = [];
     }
 
     setStackerBarChartOptions() {

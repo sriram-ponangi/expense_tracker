@@ -69,13 +69,14 @@ export class ExpensesPieChartComponent implements OnInit {
             Number(response.data?.home),
             Number(response.data?.groceries),
             Number(response.data?.uncommon),
-            Number(response.data?.futile)
+            Number(response.data?.futile),
+            Number(response.data?.vehicle)
           ]; 
           this.expenseSummaryEvent.emit(this.pieChartData);
 
 
           this.pieChartDetails = {
-            labels: ['Home', 'Groceries',  'Uncommon', 'Futile'],
+            labels: ['Home', 'Groceries',  'Uncommon', 'Futile', 'Vehicle'],
             datasets: [
               {
                 data: this.pieChartData,
@@ -83,13 +84,15 @@ export class ExpensesPieChartComponent implements OnInit {
                   "#0dcaf0",
                   "#198754",
                   "#ffc107",
-                  "#dc3545" 
+                  "#dc3545",
+                  "#a446d2" 
                 ],
                 hoverBackgroundColor: [
                   "#0989a2",
                   "#0a3622",
                   "#cc9a06",
-                  "#87212a"
+                  "#87212a",
+                  "#c284e1"
 
                 ]
               }

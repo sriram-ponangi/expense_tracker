@@ -1,8 +1,3 @@
-/*
-* Lambda Funtion to read expense items from dynamoDB
-*/
-
-
 const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient();
 //----------------------------------------------------------------------------------------------------------------
@@ -12,7 +7,9 @@ exports.handler = async (event, context, callback) => {
     let request = {
         "startDate": event.queryStringParameters.startDate,
         "endDate": event.queryStringParameters.endDate,
-        "userId": '1e952ad7-b87e-41cf-8d36-7d99b54813c9', // event?.requestContext?.authorizer?.claims?.sub
+        // "userId":  '4bb06de7-5d55-4c40-8c78-ae1d2c17eeb9',
+
+        "userId": event?.requestContext?.authorizer?.claims?.sub, 
         "responseData": event.queryStringParameters.responseData
     }
 
@@ -25,11 +22,13 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify(finalResponse),
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             }
         };
     }
 
     try {
+        
         const data = await queryItems(request);
         let response = data;
         if (request.responseData === "AGGREGATE") {
@@ -41,6 +40,11 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify(finalResponse),
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+                // 'Access-Control-Allow-Headers': 'Accept, Authorization, Referer, sec-ch-ua, sec-ch-ua-mobile, sec-ch-ua-platform, User-Agent',
+                // 'Access-Control-Allow-Credentials': true
+                
             }
         };
     } catch (err) {
@@ -50,6 +54,7 @@ exports.handler = async (event, context, callback) => {
             body: JSON.stringify(finalResponse),
             headers: {
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             }
         };
     }
@@ -91,6 +96,9 @@ function expenseRequestValidator(data) {
 // Query data from DynamoDB
 //----------------------------------------------------------------------------------------------------------------
 async function queryItems(request) {
+    console.log("startDate: ", request.startDate);
+    console.log("endDate: ", request.endDate);
+    
     var params = {
         TableName: 'expense-tracker',
         KeyConditionExpression: '#name = :value and #date_alias BETWEEN :startDate AND :endDate',
@@ -98,6 +106,7 @@ async function queryItems(request) {
         ExpressionAttributeNames: { '#name': 'user_id', '#date_alias': 'date' },
         ProjectionExpression: '#date_alias, expenses'
     }
+    
     try {
         const data = await docClient.query(params).promise();
         return data;
@@ -113,7 +122,8 @@ function computeAggregateResponse(response) {
         futile: 0,
         home: 0,
         uncommon: 0,
-        groceries: 0
+        groceries: 0,
+        vehicle: 0
     }
 
     response?.Items?.forEach((item, index) => {
@@ -131,6 +141,9 @@ function computeAggregateResponse(response) {
             else if (expense.category === "Uncommon") {
                 newResponse.uncommon = Number(newResponse.uncommon) + Number(expense.cost);
             }
+            else if (expense.category === "Vehicle") {
+                newResponse.vehicle = Number(newResponse.vehicle) + Number(expense.cost);
+            }
         });
     });
 
@@ -139,6 +152,7 @@ function computeAggregateResponse(response) {
     newResponse.home = Number(newResponse.home.toFixed(2));
     newResponse.groceries = Number(newResponse.groceries.toFixed(2));
     newResponse.uncommon = Number(newResponse.uncommon.toFixed(2));
+    newResponse.vehicle = Number(newResponse.vehicle.toFixed(2));
 
     return newResponse;
 }

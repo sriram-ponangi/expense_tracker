@@ -12,7 +12,8 @@ export class CostSummaryComponent implements OnInit {
     home:  0,
     groceries: 0,
     uncommon: 0,
-    futile: 0
+    futile: 0,
+    vehicle: 0
   };
   
   constructor() { }

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  expenses: number[] = [0, 0, 0, 0];
+  expenses: number[] = [0, 0, 0, 0, 0];
 
   constructor() { }
 
@@ -19,7 +19,8 @@ export class HomePageComponent implements OnInit {
     groceries: 0,
     home: 0,
     uncommon: 0,
-    futile: 0
+    futile: 0,
+    vehicle: 0
   }
 
   expenseSummaryEventListener(expenses: number[]) {
@@ -29,6 +30,7 @@ export class HomePageComponent implements OnInit {
     this.expenseSummary.groceries = Number(expenses[1].toFixed(2));
     this.expenseSummary.uncommon = Number(expenses[2].toFixed(2));
     this.expenseSummary.futile = Number(expenses[3].toFixed(2));
+    this.expenseSummary.vehicle = Number(expenses[4].toFixed(2));
 
   }
 

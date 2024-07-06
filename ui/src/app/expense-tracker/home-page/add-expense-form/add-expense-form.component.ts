@@ -111,7 +111,7 @@ export class AddExpenseFormComponent implements OnInit {
       errorMessages.push("Please select a valid date.");
     }
 
-    let isValidCategory = ['Home', 'Futile', 'Groceries', 'Uncommon'].includes(data.category);
+    let isValidCategory = ['Home', 'Futile', 'Groceries', 'Uncommon', 'Vehicle'].includes(data.category);
     if (!isValidCategory) {
       errorMessages.push("Please select a category from the dropdown.");
     }
