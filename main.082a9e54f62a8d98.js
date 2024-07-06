@@ -813,7 +813,6 @@ let SignUpComponent = /*#__PURE__*/(() => {
             Name: key,
             Value: formData[key]
           });
-          let attribute = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_0__.CognitoUserAttribute(attrData);
           attributeList.push(attrData);
         }
 
@@ -1277,7 +1276,8 @@ let CostSummaryComponent = /*#__PURE__*/(() => {
         home: 0,
         groceries: 0,
         uncommon: 0,
-        futile: 0
+        futile: 0,
+        vehicle: 0
       };
     }
 
@@ -1295,9 +1295,9 @@ let CostSummaryComponent = /*#__PURE__*/(() => {
     inputs: {
       expenseSummaryInput: "expenseSummaryInput"
     },
-    decls: 50,
-    vars: 5,
-    consts: [[1, "card", "shadow-lg"], [1, "card-header"], [2, "font-weight", "bold"], [1, "row"], [1, "col-md-4", "col-xs-6"], [1, "card-body"], [1, "card", "text-white", "bg-dark"], [1, "card-title"], [1, "card-text"], [1, "card", "text-black", "bg-info"], [1, "card", "text-white", "bg-success"], [1, "card", "text-black", "bg-warning"], [1, "col-md-4", "mb-2", "col-xs-6"], [1, "card", "text-white", "bg-danger"]],
+    decls: 59,
+    vars: 6,
+    consts: [[1, "card", "shadow-lg"], [1, "card-header"], [2, "font-weight", "bold"], [1, "row"], [1, "col-md-4", "col-xs-6"], [1, "card-body"], [1, "card", "text-white", "bg-dark"], [1, "card-title"], [1, "card-text"], [1, "card", "text-black", "bg-info"], [1, "card", "text-white", "bg-success"], [1, "card", "text-black", "bg-warning"], [1, "col-md-4", "mb-2", "col-xs-6"], [1, "card", "text-white", "bg-danger"], [1, "card", "text-white", 2, "background-color", "#a446d2"]],
     template: function CostSummaryComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -1387,6 +1387,22 @@ let CostSummaryComponent = /*#__PURE__*/(() => {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](51, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](52, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](53, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "h5", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, "VEHICLE");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](56, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](57, "p", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](58);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       }
@@ -1402,6 +1418,8 @@ let CostSummaryComponent = /*#__PURE__*/(() => {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.expenseSummaryInput.uncommon);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.expenseSummaryInput.futile);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.expenseSummaryInput.vehicle);
       }
     },
     styles: [""]
@@ -1434,12 +1452,12 @@ __webpack_require__.r(__webpack_exports__);
 function AddExpenseFormComponent_div_5_div_1_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 23);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "strong");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3, "ERROR: ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "button", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "button", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
@@ -1454,7 +1472,7 @@ function AddExpenseFormComponent_div_5_div_1_Template(rf, ctx) {
 function AddExpenseFormComponent_div_5_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, AddExpenseFormComponent_div_5_div_1_Template, 6, 1, "div", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, AddExpenseFormComponent_div_5_div_1_Template, 6, 1, "div", 22);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 
@@ -1468,12 +1486,12 @@ function AddExpenseFormComponent_div_5_Template(rf, ctx) {
 function AddExpenseFormComponent_ng_template_6_div_0_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 26);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "strong");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3, "Success:");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "button", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "button", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
@@ -1487,7 +1505,7 @@ function AddExpenseFormComponent_ng_template_6_div_0_Template(rf, ctx) {
 
 function AddExpenseFormComponent_ng_template_6_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](0, AddExpenseFormComponent_ng_template_6_div_0_Template, 6, 1, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](0, AddExpenseFormComponent_ng_template_6_div_0_Template, 6, 1, "div", 25);
   }
 
   if (rf & 2) {
@@ -1496,29 +1514,29 @@ function AddExpenseFormComponent_ng_template_6_Template(rf, ctx) {
   }
 }
 
-function AddExpenseFormComponent_button_34_Template(rf, ctx) {
+function AddExpenseFormComponent_button_36_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "span", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "span", 28);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, " Saving Expense... ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 }
 
-function AddExpenseFormComponent_ng_template_35_Template(rf, ctx) {
+function AddExpenseFormComponent_ng_template_37_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " Save Expense ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 }
 
-function AddExpenseFormComponent_ul_37_span_1_Template(rf, ctx) {
+function AddExpenseFormComponent_ul_39_span_1_Template(rf, ctx) {
   if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "span");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 23);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "button", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "button", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
@@ -1530,10 +1548,10 @@ function AddExpenseFormComponent_ul_37_span_1_Template(rf, ctx) {
   }
 }
 
-function AddExpenseFormComponent_ul_37_Template(rf, ctx) {
+function AddExpenseFormComponent_ul_39_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "ul", 29);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, AddExpenseFormComponent_ul_37_span_1_Template, 4, 1, "span", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "ul", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, AddExpenseFormComponent_ul_39_span_1_Template, 4, 1, "span", 22);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 
@@ -1618,7 +1636,7 @@ let AddExpenseFormComponent = /*#__PURE__*/(() => {
         errorMessages.push("Please select a valid date.");
       }
 
-      let isValidCategory = ['Home', 'Futile', 'Groceries', 'Uncommon'].includes(data.category);
+      let isValidCategory = ['Home', 'Futile', 'Groceries', 'Uncommon', 'Vehicle'].includes(data.category);
 
       if (!isValidCategory) {
         errorMessages.push("Please select a category from the dropdown.");
@@ -1656,9 +1674,9 @@ let AddExpenseFormComponent = /*#__PURE__*/(() => {
   AddExpenseFormComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
     type: AddExpenseFormComponent,
     selectors: [["app-add-expense-form"]],
-    decls: 38,
+    decls: 40,
     vars: 6,
-    consts: [[1, "card", "shadow-lg"], [1, "card-header"], [2, "font-weight", "bold"], [1, "card-body"], [4, "ngIf", "ngIfElse"], ["apiSuccessMessage", ""], [3, "formGroup", "ngSubmit"], [1, "input-group", "mb-3"], ["id", "basic-addon3", 1, "input-group-text"], ["type", "text", "id", "reason", "aria-describedby", "basic-addon3", "formControlName", "reason", "required", "", 1, "form-control"], ["type", "number", "min", "0.01", "step", "0.01", "id", "cost", "aria-describedby", "basic-addon3", "formControlName", "cost", "required", "", 1, "form-control"], ["id", "category", "aria-describedby", "basic-addon3", "formControlName", "category", "required", "", 1, "form-control"], ["value", "Groceries"], ["value", "Home"], ["value", "Uncommon"], ["value", "Futile"], ["type", "date", "id", "date", "aria-describedby", "basic-addon3", "formControlName", "date", "required", "", 1, "form-control"], [1, "d-grid"], ["class", "btn btn-dark", "type", "submit", "disabled", "", 4, "ngIf", "ngIfElse"], ["apiResponseLoaded", ""], ["class", "list-group", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["role", "alert", 1, "alert", "alert-danger", "alert-dismissible", "fade", "show"], ["type", "button", "data-bs-dismiss", "alert", "aria-label", "Close", 1, "btn-close"], [4, "ngIf"], ["role", "alert", 1, "alert", "alert-success", "alert-dismissible", "fade", "show"], ["type", "submit", "disabled", "", 1, "btn", "btn-dark"], ["role", "status", "aria-hidden", "true", 1, "spinner-border", "spinner-border-sm"], ["type", "submit", 1, "btn", "btn-dark"], [1, "list-group"]],
+    consts: [[1, "card", "shadow-lg"], [1, "card-header"], [2, "font-weight", "bold"], [1, "card-body"], [4, "ngIf", "ngIfElse"], ["apiSuccessMessage", ""], [3, "formGroup", "ngSubmit"], [1, "input-group", "mb-3"], ["id", "basic-addon3", 1, "input-group-text"], ["type", "text", "id", "reason", "aria-describedby", "basic-addon3", "formControlName", "reason", "required", "", 1, "form-control"], ["type", "number", "min", "0.01", "step", "0.01", "id", "cost", "aria-describedby", "basic-addon3", "formControlName", "cost", "required", "", 1, "form-control"], ["id", "category", "aria-describedby", "basic-addon3", "formControlName", "category", "required", "", 1, "form-control"], ["value", "Groceries"], ["value", "Home"], ["value", "Uncommon"], ["value", "Futile"], ["value", "Vehicle"], ["type", "date", "id", "date", "aria-describedby", "basic-addon3", "formControlName", "date", "required", "", 1, "form-control"], [1, "d-grid"], ["class", "btn btn-dark", "type", "submit", "disabled", "", 4, "ngIf", "ngIfElse"], ["apiResponseLoaded", ""], ["class", "list-group", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["role", "alert", 1, "alert", "alert-danger", "alert-dismissible", "fade", "show"], ["type", "button", "data-bs-dismiss", "alert", "aria-label", "Close", 1, "btn-close"], [4, "ngIf"], ["role", "alert", 1, "alert", "alert-success", "alert-dismissible", "fade", "show"], ["type", "submit", "disabled", "", 1, "btn", "btn-dark"], ["role", "status", "aria-hidden", "true", 1, "spinner-border", "spinner-border-sm"], ["type", "submit", 1, "btn", "btn-dark"], [1, "list-group"]],
     template: function AddExpenseFormComponent_Template(rf, ctx) {
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
@@ -1703,20 +1721,23 @@ let AddExpenseFormComponent = /*#__PURE__*/(() => {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "option", 15);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, "Futile");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "option", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](30, "Vehicle");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "div", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](30, "span", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](31, "Date");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](32, "input", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](31, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "span", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](33, "Date");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "div", 17);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](34, AddExpenseFormComponent_button_34_Template, 3, 0, "button", 18);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](35, AddExpenseFormComponent_ng_template_35_Template, 2, 0, "ng-template", null, 19, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplateRefExtractor"]);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](34, "input", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "div", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](36, AddExpenseFormComponent_button_36_Template, 3, 0, "button", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](37, AddExpenseFormComponent_ng_template_37_Template, 2, 0, "ng-template", null, 20, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplateRefExtractor"]);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](37, AddExpenseFormComponent_ul_37_Template, 2, 1, "ul", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](39, AddExpenseFormComponent_ul_39_Template, 2, 1, "ul", 21);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
       }
@@ -1724,13 +1745,13 @@ let AddExpenseFormComponent = /*#__PURE__*/(() => {
       if (rf & 2) {
         const _r1 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵreference"](7);
 
-        const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵreference"](36);
+        const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵreference"](38);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.hasApiError)("ngIfElse", _r1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.addExpenseForm);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](28);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.isApiLoading)("ngIfElse", _r4);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.expenseDataValidationErrors.length > 0);
@@ -1871,6 +1892,7 @@ let ExpenseOverTimeChartComponent = /*#__PURE__*/(() => {
       this.groceryExpenses = [];
       this.uncommonExpense = [];
       this.futileExpenses = [];
+      this.vehicleExpenses = [];
       this.averageExpense = [];
       let today = new Date();
       this.startDateObject = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(today.getFullYear() + "-01");
@@ -1913,7 +1935,8 @@ let ExpenseOverTimeChartComponent = /*#__PURE__*/(() => {
             this.groceryExpenses.push(monthlyExpensesList[month].groceries);
             this.uncommonExpense.push(monthlyExpensesList[month].uncommon);
             this.futileExpenses.push(monthlyExpensesList[month].futile);
-            let total = monthlyExpensesList[month].home + monthlyExpensesList[month].groceries + monthlyExpensesList[month].uncommon + monthlyExpensesList[month].futile;
+            this.vehicleExpenses.push(monthlyExpensesList[month].vehicle);
+            let total = monthlyExpensesList[month].home + monthlyExpensesList[month].groceries + monthlyExpensesList[month].uncommon + monthlyExpensesList[month].futile + monthlyExpensesList[month].vehicle;
             this.averageExpense.push(Number(total.toFixed(2)));
           }
 
@@ -1950,6 +1973,11 @@ let ExpenseOverTimeChartComponent = /*#__PURE__*/(() => {
               label: 'Futile',
               backgroundColor: "#dc3545",
               data: this.futileExpenses
+            }, {
+              type: 'bar',
+              label: 'Vehicle',
+              backgroundColor: "#a446d2",
+              data: this.vehicleExpenses
             }]
           };
         }
@@ -1969,6 +1997,7 @@ let ExpenseOverTimeChartComponent = /*#__PURE__*/(() => {
       this.groceryExpenses = [];
       this.uncommonExpense = [];
       this.futileExpenses = [];
+      this.vehicleExpenses = [];
     }
 
     setStackerBarChartOptions() {
@@ -2211,17 +2240,17 @@ let ExpensesPieChartComponent = /*#__PURE__*/(() => {
       this.isApiLoading = true;
       this.hasApiError = false;
       this.getExpenseService.getExpenseDetailsByDateRange(this.startDateObject.value, this.endDateObject.value, "AGGREGATE").subscribe(response => {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
 
         if (response.responseType === "SUCCESS") {
-          this.pieChartData = [Number((_a = response.data) === null || _a === void 0 ? void 0 : _a.home), Number((_b = response.data) === null || _b === void 0 ? void 0 : _b.groceries), Number((_c = response.data) === null || _c === void 0 ? void 0 : _c.uncommon), Number((_d = response.data) === null || _d === void 0 ? void 0 : _d.futile)];
+          this.pieChartData = [Number((_a = response.data) === null || _a === void 0 ? void 0 : _a.home), Number((_b = response.data) === null || _b === void 0 ? void 0 : _b.groceries), Number((_c = response.data) === null || _c === void 0 ? void 0 : _c.uncommon), Number((_d = response.data) === null || _d === void 0 ? void 0 : _d.futile), Number((_e = response.data) === null || _e === void 0 ? void 0 : _e.vehicle)];
           this.expenseSummaryEvent.emit(this.pieChartData);
           this.pieChartDetails = {
-            labels: ['Home', 'Groceries', 'Uncommon', 'Futile'],
+            labels: ['Home', 'Groceries', 'Uncommon', 'Futile', 'Vehicle'],
             datasets: [{
               data: this.pieChartData,
-              backgroundColor: ["#0dcaf0", "#198754", "#ffc107", "#dc3545"],
-              hoverBackgroundColor: ["#0989a2", "#0a3622", "#cc9a06", "#87212a"]
+              backgroundColor: ["#0dcaf0", "#198754", "#ffc107", "#dc3545", "#a446d2"],
+              hoverBackgroundColor: ["#0989a2", "#0a3622", "#cc9a06", "#87212a", "#c284e1"]
             }]
           };
         }
@@ -2339,13 +2368,14 @@ __webpack_require__.r(__webpack_exports__);
 let HomePageComponent = /*#__PURE__*/(() => {
   class HomePageComponent {
     constructor() {
-      this.expenses = [0, 0, 0, 0];
+      this.expenses = [0, 0, 0, 0, 0];
       this.expenseSummary = {
         total: 0,
         groceries: 0,
         home: 0,
         uncommon: 0,
-        futile: 0
+        futile: 0,
+        vehicle: 0
       };
     }
 
@@ -2357,6 +2387,7 @@ let HomePageComponent = /*#__PURE__*/(() => {
       this.expenseSummary.groceries = Number(expenses[1].toFixed(2));
       this.expenseSummary.uncommon = Number(expenses[2].toFixed(2));
       this.expenseSummary.futile = Number(expenses[3].toFixed(2));
+      this.expenseSummary.vehicle = Number(expenses[4].toFixed(2));
     }
 
   }
