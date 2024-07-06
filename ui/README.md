@@ -30,6 +30,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Deploy the angular app in Github Pages
 
 First build this app with the following command: 
-> ng build --base-href https://sriram-ponangi.github.io/expense_tracker
+> ng build --optimization=false --base-href https://sriram-ponangi.github.io/expense_tracker
 
 Then upload the build output i.e., the dist directory contents to the configured github pages branch (Ex: app)
