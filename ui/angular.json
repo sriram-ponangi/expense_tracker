@@ -31,12 +31,12 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootswatch/dist/cosmo/bootstrap.min.css"
+              "node_modules/bootswatch/dist/cosmo/bootstrap.min.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/chart.js/dist/Chart.js"
             ]
           },
           "configurations": {
@@ -107,12 +107,12 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootswatch/dist/cosmo/bootstrap.min.css"
+              "node_modules/bootswatch/dist/cosmo/bootstrap.min.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/chart.js/dist/Chart.js",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/chart.js/dist/Chart.js"
             ]
           }
         }
