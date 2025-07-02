@@ -1,18 +1,22 @@
-const AWS = require('aws-sdk');
-const docClient = new AWS.DynamoDB.DocumentClient();
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, QueryCommand } from "@aws-sdk/lib-dynamodb";
+
+// Initialize DynamoDB client
+const client = new DynamoDBClient({
+  region: process.env.AWS_REGION || "us-east-1"
+});
+const docClient = DynamoDBDocumentClient.from(client);
+
 //----------------------------------------------------------------------------------------------------------------
 // Main Block
 //----------------------------------------------------------------------------------------------------------------
-exports.handler = async (event, context, callback) => {
+export const handler = async (event, context, callback) => {
     let request = {
         "startDate": event.queryStringParameters.startDate,
         "endDate": event.queryStringParameters.endDate,
-        // "userId":  '4bb06de7-5d55-4c40-8c78-ae1d2c17eeb9',
-
-        "userId": event?.requestContext?.authorizer?.claims?.sub, 
+        "userId":   event?.requestContext?.authorizer?.claims?.sub, // "4bb06de7-5d55-4c40-8c78-ae1d2c17eeb9",
         "responseData": event.queryStringParameters.responseData
     }
-
 
     let errorMessages = expenseRequestValidator(request);
     if (errorMessages.length > 0) {
@@ -28,7 +32,6 @@ exports.handler = async (event, context, callback) => {
     }
 
     try {
-        
         const data = await queryItems(request);
         let response = data;
         if (request.responseData === "AGGREGATE") {
@@ -41,10 +44,6 @@ exports.handler = async (event, context, callback) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                // 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                // 'Access-Control-Allow-Headers': 'Accept, Authorization, Referer, sec-ch-ua, sec-ch-ua-mobile, sec-ch-ua-platform, User-Agent',
-                // 'Access-Control-Allow-Credentials': true
-                
             }
         };
     } catch (err) {
@@ -59,6 +58,7 @@ exports.handler = async (event, context, callback) => {
         };
     }
 }
+
 //----------------------------------------------------------------------------------------------------------------
 // Request Validations
 //----------------------------------------------------------------------------------------------------------------
@@ -84,14 +84,13 @@ function expenseRequestValidator(data) {
         }
     }
 
-
     if (!(data.responseData === "AGGREGATE" || data.responseData === "DETAILED")) {
         errorMessages.push('Invalid Response Data. The value of responseData must either be "AGGREGATE" or "DETAILED" ');
     }
 
     return errorMessages;
-
 }
+
 //----------------------------------------------------------------------------------------------------------------
 // Query data from DynamoDB
 //----------------------------------------------------------------------------------------------------------------
@@ -99,21 +98,22 @@ async function queryItems(request) {
     console.log("startDate: ", request.startDate);
     console.log("endDate: ", request.endDate);
     
-    var params = {
+    const command = new QueryCommand({
         TableName: 'expense-tracker',
         KeyConditionExpression: '#name = :value and #date_alias BETWEEN :startDate AND :endDate',
         ExpressionAttributeValues: { ':value': request.userId, ':startDate': request.startDate, ':endDate': request.endDate },
         ExpressionAttributeNames: { '#name': 'user_id', '#date_alias': 'date' },
         ProjectionExpression: '#date_alias, expenses'
-    }
+    });
     
     try {
-        const data = await docClient.query(params).promise();
+        const data = await docClient.send(command);
         return data;
     } catch (err) {
         return err;
     }
 }
+
 //----------------------------------------------------------------------------------------------------------------
 // Calculate the Aggregate of costs in the given data
 //----------------------------------------------------------------------------------------------------------------
@@ -147,7 +147,6 @@ function computeAggregateResponse(response) {
         });
     });
 
-
     newResponse.futile = Number(newResponse.futile.toFixed(2));
     newResponse.home = Number(newResponse.home.toFixed(2));
     newResponse.groceries = Number(newResponse.groceries.toFixed(2));
@@ -156,15 +155,14 @@ function computeAggregateResponse(response) {
 
     return newResponse;
 }
+
 //----------------------------------------------------------------------------------------------------------------
 // Response Object
 //----------------------------------------------------------------------------------------------------------------
 class FinalResponse {
-
     constructor(responseType, errorMessages, data) {
         this.responseType = responseType;
         this.errorMessages = errorMessages;
         this.data = data;
     }
-
 }
