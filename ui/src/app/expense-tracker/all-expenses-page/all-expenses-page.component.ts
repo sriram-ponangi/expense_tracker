@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { APIResponse } from '../models/APIResponse';
-import { ExpensesInfo } from '../models/ExpensesInfo';
-import { GetExpensesService } from '../services/get-expenses/get-expenses.service';
+import { Expense, ExpensesInfo } from '../models/ExpensesInfo';
+import { WriteExpenseService } from '../services/write-expense/write-expense.service';
+import { ReadExpensesService } from '../services/read-expenses/read-expenses.service';
 
 @Component({
   selector: 'app-all-expenses-page',
@@ -11,7 +11,7 @@ import { GetExpensesService } from '../services/get-expenses/get-expenses.servic
 })
 export class AllExpensesPageComponent implements OnInit {
 
-  tablesColumnNames = ["Date", "Reason", "Category", "Cost"];
+  tablesColumnNames = ["Date", "Reason", "Category", "Cost", "Actions"];
   tableData: ExpensesInfo[] = [];
   hasApiError = false;
   isApiLoading = true;
@@ -28,7 +28,8 @@ export class AllExpensesPageComponent implements OnInit {
   );
  
 
-  constructor(private getExpenseService: GetExpensesService) { }
+
+  constructor(private readExpenseService: ReadExpensesService, private writeExpenseService: WriteExpenseService) { }
 
   ngOnInit(): void {
     this.loadExpenseTableInfo();
@@ -38,7 +39,7 @@ export class AllExpensesPageComponent implements OnInit {
     this.isApiLoading = true;
     this.hasApiError = false;
 
-    this.getExpenseService.getExpenseDetailsByDateRange(this.startDateObject.value, this.endDateObject.value, "DETAILED")
+    this.readExpenseService.readExpenseDetailsByDateRange(this.startDateObject.value, this.endDateObject.value, "DETAILED")
       .subscribe(
         response => {
           if (response.responseType === "SUCCESS") {
@@ -54,6 +55,31 @@ export class AllExpensesPageComponent implements OnInit {
           this.isApiLoading = false;
         }
       );
+  }
+
+  deleteExpense(expense: Expense, date: Date) {
+
+    let deleteExpenseInfo = {
+      reason: expense.reason,
+      cost: expense.cost,
+      category: expense.category,
+      date: date
+    };
+
+    this.writeExpenseService.deleteExpenseInfo(deleteExpenseInfo).subscribe(
+      response => {
+        if (response.responseType === "SUCCESS") {
+          this.tableData.forEach(element => {
+            if (element.date === date) {
+              element.expenses = element.expenses.filter(exp => 
+                (exp.reason !== expense.reason && exp.cost !== expense.cost && exp.category !== expense.category));
+            }
+          });
+        }
+      }, error => {
+        console.error(error);
+      }
+    );
   }
 
 }

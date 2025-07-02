@@ -10,11 +10,11 @@ import { APIResponse } from '../../models/APIResponse';
 @Injectable({
   providedIn: 'root'
 })
-export class GetExpensesService {
+export class ReadExpensesService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getExpenseDetailsByDateRange(startDate: string, endDate: string, responseDataFormat: string): Observable<APIResponse> {
+  readExpenseDetailsByDateRange(startDate: string, endDate: string, responseDataFormat: string): Observable<APIResponse> {
     const params = new HttpParams()
       .set('startDate', startDate)
       .set('endDate', endDate)
@@ -30,7 +30,7 @@ export class GetExpensesService {
   }
 
 
-  getMonthlyExpenseHistoryByDateRange(startDate: string, endDate: string): Observable<APIResponse> {
+  readMonthlyExpenseHistoryByDateRange(startDate: string, endDate: string): Observable<APIResponse> {
     const params = new HttpParams()
       .set('startDate', startDate)
       .set('endDate', endDate);

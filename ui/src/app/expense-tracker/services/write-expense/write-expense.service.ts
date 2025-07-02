@@ -9,11 +9,11 @@ import { ExpensesInfo } from '../../models/ExpensesInfo';
 @Injectable({
   providedIn: 'root'
 })
-export class CreateExpenseService {
+export class WriteExpenseService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  setExpenseInfo(body: any): Observable<APIResponse> {
+  createExpenseInfo(body: any): Observable<APIResponse> {
 
     let isSuccessful = false;
 
@@ -24,5 +24,14 @@ export class CreateExpenseService {
 
     return this.http.post<APIResponse>(environment.api, body, options);
 
+  }
+
+  deleteExpenseInfo(body: any): Observable<APIResponse> {
+    const headers = new HttpHeaders()
+      .set('Authorization', this.authService.getAuthToken());
+
+    const options = { headers: headers, body: body };
+
+    return this.http.delete<APIResponse>(environment.api, options);
   }
 }

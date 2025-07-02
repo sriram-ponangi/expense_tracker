@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { GetExpensesService } from '../../services/get-expenses/get-expenses.service';
+import { ReadExpensesService } from '../../services/read-expenses/read-expenses.service';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class ExpenseOverTimeChartComponent implements OnInit {
     averageExpense: number[];
 
 
-    constructor(private getExpenseService: GetExpensesService) {
+    constructor(private readExpenseService: ReadExpensesService) {
         this.hasApiError = false;
         this.isApiLoading = true;
 
@@ -76,7 +76,7 @@ export class ExpenseOverTimeChartComponent implements OnInit {
         console.log(parseInt(this.startDateObject.value.substring(0, 4)), this.startDateObject.value.substring(5, 7), 1);
         console.log(parseInt(this.endDateObject.value.substring(0, 4)), this.endDateObject.value.substring(5, 7), 0);
 
-        this.getExpenseService.getMonthlyExpenseHistoryByDateRange(this.startDateObject.value, this.endDateObject.value)
+        this.readExpenseService.readMonthlyExpenseHistoryByDateRange(this.startDateObject.value, this.endDateObject.value)
 
             .subscribe(next => {
                 if (next.responseType === "SUCCESS") {

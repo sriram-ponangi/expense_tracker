@@ -7,29 +7,27 @@
     <div class="row">
 
         <div class="col-md-6">
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">Start Month</span>
-                <input type="month" class="form-control" id="startDate" aria-describedby="basic-addon3"
-                    [formControl]="startDateObject" required>
+            <div class="form-floating mb-3">
+                <input type="month" class="form-control" id="startDate" placeholder="Start Month" [formControl]="startDateObject" required>
+                <label for="startDate">Start Month</label>
             </div>
         </div>
 
 
         <div class="col-md-6">
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3">End Month</span>
-                <input type="month" class="form-control" id="endDate" aria-describedby="basic-addon3"
-                    [formControl]="endDateObject" required>
+            <div class="form-floating mb-3">
+                <input type="month" class="form-control" id="endDate" placeholder="End Month" [formControl]="endDateObject" required>
+                <label for="endDate">End Month</label>
             </div>
         </div>
 
         <div class=" d-grid">
-            <button class="btn btn-dark" type="submit" disabled *ngIf="isApiLoading; else apiResponseLoadedButton">
+            <button class="btn btn-primary" type="submit" disabled *ngIf="isApiLoading; else apiResponseLoadedButton">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Fetching Expense History...
             </button>
             <ng-template #apiResponseLoadedButton>
-                <button type="button" class="btn btn-dark" (click)="loadExpenseHistoryBarChartData()"> 
+                <button type="button" class="btn btn-primary" (click)="loadExpenseHistoryBarChartData()"> 
                     Show Expenses History
                 </button>
             </ng-template>

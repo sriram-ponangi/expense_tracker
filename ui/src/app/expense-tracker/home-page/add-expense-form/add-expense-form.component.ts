@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Expense, ExpensesInfo } from '../../models/ExpensesInfo';
-import { CreateExpenseService } from '../../services/set-expense/create-expense.service';
+import { WriteExpenseService } from '../../services/write-expense/write-expense.service';
 
 @Component({
   selector: 'app-add-expense-form',
@@ -22,7 +22,7 @@ export class AddExpenseFormComponent implements OnInit {
   apiErrorResponseMessages: string[];
   apiSuccessResponseMessage: string;
 
-  constructor(private setExpenseService: CreateExpenseService, private formBuilder: FormBuilder) {
+  constructor(private writeExpenseService: WriteExpenseService, private formBuilder: FormBuilder) {
     this.apiErrorResponseMessages = [];
     this.expenseDataValidationErrors = [];
     this.apiSuccessResponseMessage = "";
@@ -60,7 +60,7 @@ export class AddExpenseFormComponent implements OnInit {
       // let apiRequest: ExpensesInfo = new ExpensesInfo(new Date(this.addExpenseForm.value.date), [expense]);
       // console.log(this.addExpenseForm.value);
 
-      this.setExpenseService.setExpenseInfo(this.addExpenseForm.value).subscribe(response => {
+      this.writeExpenseService.createExpenseInfo(this.addExpenseForm.value).subscribe(response => {
 
         if (response.responseType === "SUCCESS") {
           // console.log(this.apiSuccessResponseMessage);

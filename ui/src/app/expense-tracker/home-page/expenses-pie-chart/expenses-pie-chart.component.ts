@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { GetExpensesService } from '../../services/get-expenses/get-expenses.service';
+import { ReadExpensesService } from '../../services/read-expenses/read-expenses.service';
 import { Output, EventEmitter } from '@angular/core';
 
 
@@ -37,7 +37,7 @@ export class ExpensesPieChartComponent implements OnInit {
   startDateObject: FormControl;
   endDateObject: FormControl;
 
-  constructor(private getExpenseService: GetExpensesService) {
+  constructor(private readExpenseService: ReadExpensesService) {
     this.pieChartData = [];
 
     this.hasApiError = false;
@@ -61,7 +61,7 @@ export class ExpensesPieChartComponent implements OnInit {
     this.isApiLoading = true;
     this.hasApiError = false;
 
-    this.getExpenseService.getExpenseDetailsByDateRange(this.startDateObject.value, this.endDateObject.value, "AGGREGATE")
+    this.readExpenseService.readExpenseDetailsByDateRange(this.startDateObject.value, this.endDateObject.value, "AGGREGATE")
 
       .subscribe(response => {
         if (response.responseType === "SUCCESS") {
@@ -81,9 +81,9 @@ export class ExpensesPieChartComponent implements OnInit {
               {
                 data: this.pieChartData,
                 backgroundColor: [
-                  "#0dcaf0",
+                  "#00aacb",
                   "#198754",
-                  "#ffc107",
+                  "#ffbf00",
                   "#dc3545",
                   "#a446d2" 
                 ],
@@ -92,7 +92,7 @@ export class ExpensesPieChartComponent implements OnInit {
                   "#0a3622",
                   "#cc9a06",
                   "#87212a",
-                  "#c284e1"
+                  "#a204f0"
 
                 ]
               }

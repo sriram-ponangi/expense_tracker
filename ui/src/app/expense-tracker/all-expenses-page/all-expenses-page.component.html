@@ -8,30 +8,27 @@
 
         <div class="row mb-3">
 
-            <div class="col-xl-6">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3">Start Date</span>
-                    <input type="date" class="form-control" id="startDate" aria-describedby="basic-addon3"
-                        [formControl]="startDateObject" required>
-                    <!-- [value]="startDateObject.value | date: 'yyyy-MM-dd' "> -->
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="startDate" placeholder="Start Date" [formControl]="startDateObject" required>
+                    <label for="startDate">Start Date</label>
                 </div>
             </div>
 
-            <div class="col-xl-6">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3">End Date</span>
-                    <input type="date" class="form-control" id="endDate" aria-describedby="basic-addon3"
-                        [formControl]="endDateObject" required [min]="startDateObject.value">
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="endDate" placeholder="End Date" [formControl]="endDateObject" required [min]="startDateObject.value">
+                    <label for="endDate">End Date</label>
                 </div>
             </div>
 
             <div class=" d-grid">
-                <button class="btn btn-dark" type="submit" disabled *ngIf="isApiLoading; else apiResponseLoadedButton">
+                <button class="btn btn-primary" type="submit" disabled *ngIf="isApiLoading; else apiResponseLoadedButton">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Fetching Expenses...
                 </button>
                 <ng-template #apiResponseLoadedButton>
-                    <button type="button" class="btn btn-dark " (click)="loadExpenseTableInfo()"> Show All
+                    <button type="button" class="btn btn-primary " (click)="loadExpenseTableInfo()"> Show All
                         Expenses</button>
                 </ng-template>
             </div>
@@ -76,6 +73,9 @@
                                     <td>{{expense.reason}}</td>
                                     <td>{{expense.category}}</td>
                                     <td>{{expense.cost}}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" (click)="deleteExpense(expense, expensesListByDate.date)">Delete</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

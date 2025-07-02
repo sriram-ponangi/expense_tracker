@@ -1,23 +1,24 @@
 <div class="row mb-3">
 
   <div class="col-md-6  col-xs-12">
-    <app-expenses-pie-chart (expenseSummaryEvent)="expenseSummaryEventListener($event)"></app-expenses-pie-chart>
-  </div>
-
-  <div class="col-md-6  col-xs-12">
 
     <div class="row mb-3">
-
-      <div class="col-12 mb-3">
-        <app-cost-summary [expenseSummaryInput]="expenseSummary"></app-cost-summary>
-      </div>
 
       <div class="col-12 mb-3">
         <app-add-expense-form></app-add-expense-form>
       </div>
 
+      <div class="col-12 mb-3">
+        <app-cost-summary [expenseSummaryInput]="expenseSummary"></app-cost-summary>
+      </div>
+
     </div>
   </div>
+
+  <div class="col-md-6  col-xs-12">
+    <app-expenses-pie-chart (expenseSummaryEvent)="expenseSummaryEventListener($event)"></app-expenses-pie-chart>
+  </div>
+
 </div>
 
 <div class="row mb-3">
