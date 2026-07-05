@@ -4,7 +4,7 @@ This is a full-stack serverless application that allows users to track their exp
 
 ## Architecture
 
-![Expense Tracker Serverless Architecture](https://github.com/sriram-ponangi/expense_tracker/blob/develop/Serverless%20Application%20Architecture.jpg)
+![Expense Tracker Serverless Architecture](docs/Serverless%20Application%20Architecture.jpg)
 
 The application follows a classic serverless pattern:
 
