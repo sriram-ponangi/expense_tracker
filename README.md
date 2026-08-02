@@ -76,6 +76,14 @@ The frontend is deployed to GitHub Pages.
     
 2.  The contents of the build output i.e., `ui/dist/ui` directory are committed to the `app` branch of this repository.
 
+The frontend is deployed to Cloudflare Pages.
+1.  Build the application with the correct `--base-href`:
+    ```bash
+    ng build --optimization=false --base-href /
+    ```
+2. The contents of the build output i.e., `ui/dist/ui` directory are uploaded to `Workers & Pages > app-name(ex: Workers & Pages
+expense-tracker) > Deployments`
+
  
 ## To-Do
 
