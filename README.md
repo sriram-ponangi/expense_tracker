@@ -8,12 +8,14 @@ This is a full-stack serverless application that allows users to track their exp
 
 The application follows a classic serverless pattern:
 
-*   **Frontend**: An Angular single-page application (SPA) provides the user interface. It is hosted on GitHub Pages or S3 Bucket.
+*   **Frontend**: An Angular single-page application (SPA) provides the user interface. Deployable to an S3 bucket, Cloudflare Pages, or GitHub Pages (see [Deployment](#deployment) for the specifics).
 *   **Backend**:
     *   **Amazon Cognito**: Handles user authentication and authorization, including sign-up, sign-in, and user management.
     *   **Amazon API Gateway**: Provides a secure and scalable entry point for the application's API. It routes requests to the appropriate Lambda functions.
     *   **AWS Lambda**: Contains the core business logic for creating, reading, and deleting expenses. The Lambda functions are written in Node.js.
-    *   **Amazon DynamoDB**: A NoSQL database used to store expense data.
+    *   **Amazon DynamoDB**: A NoSQL database used to store expense data. Provisioned throughput with application auto-scaling enabled.
+*   **Infrastructure as Code**: The entire AWS backend (Cognito, API Gateway, Lambda, IAM, DynamoDB, and its auto-scaling) is managed by **Terraform**. State lives in S3 with native locking. See [`iac/README.md`](iac/README.md).
+*   **Data backup & restore**: Bash scripts export the DynamoDB table to S3 and rebuild a fresh table from the export via `import-table`. See [`backend/dynamoDB/README.md`](backend/dynamoDB/README.md).
 
 ## Features
 
@@ -33,10 +35,7 @@ The application follows a classic serverless pattern:
 
 ### Backend Setup
 
-1.  **Cognito User Pool**: Create a Cognito User Pool to manage user authentication. Note the User Pool ID and Client ID.
-2.  **DynamoDB Table**: Create a DynamoDB table to store the expense data. Define the primary key and any necessary secondary indexes.
-3.  **Lambda Functions**: Deploy the Lambda functions located in the `backend/lambda_functions` directory. You will need to configure the environment variables for each function with the Cognito User Pool ID, Client ID, and DynamoDB table name.
-4.  **API Gateway**: Create an API Gateway and configure it to trigger the appropriate Lambda functions for each endpoint. Secure the endpoints using a Cognito authorizer.
+The backend is provisioned end-to-end by Terraform. Follow [`iac/README.md`](iac/README.md) — a single `terraform apply` creates/updates Cognito, DynamoDB (with auto-scaling), Lambda functions and IAM roles, and API Gateway wired to Cognito.
 
 ### Frontend Setup
 
@@ -59,32 +58,34 @@ The application follows a classic serverless pattern:
 
 ### Backend
 
-The backend is deployed to AWS using the services mentioned above. You can use the AWS Management Console, AWS CLI, or an infrastructure-as-code tool like AWS CloudFormation or Terraform to automate the deployment process.
+The backend is deployed to AWS via **Terraform** — the full stack (Cognito, API Gateway, Lambda code + config, IAM, DynamoDB, auto-scaling) is defined in [`iac/`](iac/) and applied with `terraform apply`. See [`iac/README.md`](iac/README.md) for first-time setup and the day-to-day workflow.
 
 ### Frontend
 
-The frontend is deployed to GitHub Pages.
+The frontend can be deployed to any of the three targets below. Cloudflare Pages is the currently-live deployment: <https://expense-tracker.ponangi.workers.dev/>.
 
-1.  Build the application with the correct `--base-href`:
+#### Option A — Cloudflare Pages (current live deployment)
+
+1.  Build:
+    ```bash
+    ng build --optimization=false --base-href /
+    ```
+2.  Upload `ui/dist/ui/` to `Workers & Pages > <app-name> > Deployments`.
+
+#### Option B — GitHub Pages
+
+1.  Build with the repo-scoped base href (trailing slash required):
     ```bash
     ng build --optimization=false --base-href https://<your-github-username>.github.io/<your-repo-name>/
 
     # Example:
-    # NOTE: The slash at the end of base-href is required do not exclude it.
     ng build --optimization=false --base-href https://sriram-ponangi.github.io/expense_tracker/
     ```
-    
-2.  The contents of the build output i.e., `ui/dist/ui` directory are committed to the `app` branch of this repository.
+2.  Commit `ui/dist/ui/` to the `app` branch.
 
-The frontend is deployed to Cloudflare Pages.
-1.  Build the application with the correct `--base-href`:
-    ```bash
-    ng build --optimization=false --base-href /
-    ```
-2. The contents of the build output i.e., `ui/dist/ui` directory are uploaded to `Workers & Pages > app-name(ex: Workers & Pages
-expense-tracker) > Deployments`
+#### Option C — S3 bucket
 
-3. In this case the site is accessible at: https://expense-tracker.ponangi.workers.dev/ 
+Upload the built `ui/dist/ui/` directory to an S3 bucket configured for static website hosting (or fronted by CloudFront). Set `--base-href` to the bucket's serving path.
 
  
 ## To-Do
