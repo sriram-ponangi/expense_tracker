@@ -1,3 +1,4 @@
+/*
 # ==================================================================
 # Import blocks — bring existing AWS resources under Terraform state.
 # After the first `terraform apply`, these blocks can be removed
@@ -282,3 +283,4 @@ import {
 # logs permission today so its log group does not yet exist — attempting to
 # import it fails. If retention needs to be enforced later, add resources +
 # imports for the log groups that already exist.
+*/

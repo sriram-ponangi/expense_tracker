@@ -16,7 +16,7 @@ iac/
 ├── variables.tf             # region, tags, table name, stage, CORS URLs
 ├── main.tf                  # composes modules
 ├── outputs.tf               # user pool, API, table, invoke URL
-├── imports.tf               # one-time import blocks — delete after first apply
+├── imports.tf               # one-time import blocks — block-commented after first apply
 ├── terraform.tfvars.example
 └── modules/
     ├── dynamodb/
@@ -30,7 +30,10 @@ The Lambda source files under `backend/lambda_functions/` are packaged directly:
 
 ---
 
-## Part 1 — First-time setup (one-time import from live AWS)
+<details>
+<summary>
+    <h2 style="display:inline">Part 1 — First-time setup (one-time import from live AWS)</h2>
+</summary>
 
 Run this **once** on a fresh machine to bring the existing AWS resources under Terraform's control.
 
@@ -49,14 +52,13 @@ The bucket `expense--tracker` already exists (used for DynamoDB backups). Enable
 aws s3api put-bucket-versioning \
   --bucket expense--tracker --region us-east-2 \
   --versioning-configuration Status=Enabled
+
+aws s3api put-public-access-block \
+  --bucket expense--tracker --region us-east-2 \
+  --public-access-block-configuration \
+      "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
 ```
 
-```bash
-aws s3api put-public-access-block \
-    --bucket expense--tracker --region us-east-2 \
-    --public-access-block-configuration \
-    "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
-```
 (Encryption is already AES256; no change needed.)
 
 ### Step 3. Initialize Terraform
@@ -115,19 +117,24 @@ Smoke-test the app itself (angular UI → sign-in, add expense, view history, de
 
 ### Step 7. Cleanup
 
-Once Step 6 is clean, the `import { }` blocks have done their job — state already holds every resource. Comment them out (as a block) so future `plan`s don't re-execute them, but the file stays around as documentation of what was imported:
+Once Step 6 is clean, the `import { }` blocks have done their job — state already holds every resource. Comment them out (as a block) so future `plan`s don't re-execute them, but the file stays around as documentation of what was imported.
+
+Run from inside `iac/`:
 
 ```bash
-{ echo '/*'; cat iac/imports.tf; echo '*/'; } > iac/imports.tf.new && mv iac/imports.tf.new iac/imports.tf
-terraform fmt iac/imports.tf
+cd iac
+{ echo '/*'; cat imports.tf; echo '*/'; } > imports.tf.new && mv imports.tf.new imports.tf
+terraform fmt imports.tf
 terraform plan                   # should still be clean
-git add iac/imports.tf
+git add imports.tf
 git commit -m "iac: comment out import blocks after first-run import"
 ```
 
 Terraform's `/* … */` block comments work file-wide, so a single pair wrapping the whole file is enough. If you ever need to import another resource later, uncomment the file (or a single block), run `plan` → `apply`, then re-wrap.
 
 Optionally, remove `terraform.tfvars` from your local checkout (or keep it — it's already `.gitignore`d).
+
+</details>
 
 ---
 
@@ -229,8 +236,8 @@ The `aws_cognito_user_pool` resource has `lifecycle { ignore_changes = [schema] 
 
 **Unmanaged resources you want to bring under Terraform**
 
-Log groups (auto-created by Lambda), the 11 `aws_lambda_permission` statements, and orphan API GW deployments are intentionally unmanaged. To adopt them:
+CloudWatch log groups (auto-created by Lambda on invocation) and the 11 `aws_lambda_permission` statements are intentionally unmanaged. To adopt them:
 1. Add the resource to the relevant module.
-2. Add an `import { to = ..., id = ... }` block.
+2. Add an `import { to = ..., id = ... }` block (uncomment `imports.tf` if needed).
 3. `terraform plan` (adopts it) → `terraform apply`.
-4. Delete the import block.
+4. Comment out or delete the new import block once done.
