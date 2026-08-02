@@ -130,8 +130,6 @@ git add imports.tf
 git commit -m "iac: comment out import blocks after first-run import"
 ```
 
-Terraform's `/* … */` block comments work file-wide, so a single pair wrapping the whole file is enough. If you ever need to import another resource later, uncomment the file (or a single block), run `plan` → `apply`, then re-wrap.
-
 Optionally, remove `terraform.tfvars` from your local checkout (or keep it — it's already `.gitignore`d).
 
 </details>
