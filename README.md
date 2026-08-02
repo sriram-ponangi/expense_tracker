@@ -84,6 +84,8 @@ The frontend is deployed to Cloudflare Pages.
 2. The contents of the build output i.e., `ui/dist/ui` directory are uploaded to `Workers & Pages > app-name(ex: Workers & Pages
 expense-tracker) > Deployments`
 
+3. In this case the site is accessible at: https://expense-tracker.ponangi.workers.dev/ 
+
  
 ## To-Do
 
