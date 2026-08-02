@@ -6,6 +6,33 @@
 # ==================================================================
 
 # ------------------ DynamoDB ------------------
+
+# DynamoDB application auto-scaling (targets + policies).
+# Import IDs:
+#   target: <namespace>/<resource-id>/<scalable-dimension>
+#   policy: <namespace>/<resource-id>/<scalable-dimension>/<policy-name>
+
+import {
+  to = module.dynamodb.aws_appautoscaling_target.read
+  id = "dynamodb/table/expense-tracker/dynamodb:table:ReadCapacityUnits"
+}
+
+import {
+  to = module.dynamodb.aws_appautoscaling_target.write
+  id = "dynamodb/table/expense-tracker/dynamodb:table:WriteCapacityUnits"
+}
+
+import {
+  to = module.dynamodb.aws_appautoscaling_policy.read
+  id = "dynamodb/table/expense-tracker/dynamodb:table:ReadCapacityUnits/$expense-tracker-scaling-policy"
+}
+
+import {
+  to = module.dynamodb.aws_appautoscaling_policy.write
+  id = "dynamodb/table/expense-tracker/dynamodb:table:WriteCapacityUnits/$expense-tracker-scaling-policy"
+}
+
+
 import {
   to = module.dynamodb.aws_dynamodb_table.expense_tracker
   id = "expense-tracker"
