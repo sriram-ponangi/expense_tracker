@@ -1,0 +1,14 @@
+aws_region     = "us-east-2"
+aws_account_id = "885115002496"
+
+table_name     = "expense-tracker"
+api_stage_name = "dev"
+
+cognito_callback_urls = ["http://localhost:4200/home"]
+cognito_logout_urls   = ["http://localhost:4200/sign-in"]
+
+default_tags = {
+  app       = "expense-tracker"
+  project   = "expense-tracker"
+  managedBy = "terraform"
+}
