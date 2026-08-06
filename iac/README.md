@@ -28,6 +28,40 @@ iac/
 
 The Lambda source files under `backend/lambda_functions/` are packaged directly: Terraform reads each `expense-tracker-*.mjs|.js`, renames it to `index.mjs` (or `index.js`) inside the zip, and uploads. Any code change → `terraform apply`.
 
+## Dependency Chain (Terraform handles automatically)
+
+Resources are created in this order via implicit Terraform dependencies (reference tracking):
+
+```
+1. DynamoDB table (expense-tracker)
+   ├─→ 2. DynamoDB auto-scaling targets + policies (reference the table name)
+   
+3. Cognito user pool
+   ├─→ 4. Cognito user pool client (references pool ID)
+   ├─→ 5. Cognito hosted-UI domain (references pool)
+   └─→ 6. API Gateway Cognito authorizer (references pool ARN)
+
+7. IAM roles (4 roles instantiated)
+   ├─→ 8. IAM policies (3 customer-managed policies)
+   └─→ 9. IAM role-policy attachments (reference roles + policies)
+
+10. Lambda functions (5 functions, reference IAM roles in execution_role_arn)
+
+11. API Gateway REST API
+    ├─→ 12. API Gateway resources (/, /{history+})
+    ├─→ 13. API Gateway methods (POST/GET/DELETE/OPTIONS)
+    ├─→ 14. API Gateway integrations (reference Lambda function ARNs)
+    ├─→ 15. API Gateway method/integration responses
+    └─→ 16. API Gateway deployment + stage
+```
+
+**You do NOT need to manually control this order** — Terraform's dependency resolver traces all resource references and applies in the correct sequence. If you run `terraform apply` without specifying an order, Terraform will figure it out. However, the modular layout ensures:
+- Cognito module is independent (no inter-service deps).
+- DynamoDB module is independent.
+- IAM is instantiated before Lambda so roles exist.
+- Lambda is instantiated before API Gateway so function ARNs are available.
+- API Gateway is last (depends on Lambda + Cognito).
+
 ---
 
 <details>
